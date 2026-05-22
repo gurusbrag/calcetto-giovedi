@@ -6,72 +6,23 @@
 <meta name="theme-color" content="#0a1628">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="App calcetto del giovedì — convocazioni, gol, statistiche e foto">
+<meta name="description" content="Convocazioni, gol e statistiche del calcetto del giovedì">
 <meta name="application-name" content="Calcetto Giovedì">
 <meta name="mobile-web-app-capable" content="yes">
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 <title>⚽ Calcetto Giovedì</title>
-
-<!-- ═══ PWA MANIFEST (inline blob) ═══════════════════════════ -->
 <script>
-(function(){
-  const manifest = {
-    name: "Calcetto Giovedì",
-    short_name: "Calcetto",
-    description: "Convocazioni, gol e statistiche del calcetto del giovedì",
-    start_url: "./",
-    display: "standalone",
-    background_color: "#080f1e",
-    theme_color: "#0a1628",
-    orientation: "portrait-primary",
-    lang: "it",
-    icons: [
-      {
-        src: "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="80" fill="#0d1a2e"/><text y="360" x="256" text-anchor="middle" font-size="340">⚽</text></svg>'),
-        sizes: "512x512", type: "image/svg+xml", purpose: "any maskable"
-      },
-      {
-        src: "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="30" fill="#0d1a2e"/><text y="138" x="96" text-anchor="middle" font-size="130">⚽</text></svg>'),
-        sizes: "192x192", type: "image/svg+xml", purpose: "any maskable"
-      }
-    ],
-    categories: ["sports","social"],
-    shortcuts: [
-      { name: "Convocazioni", short_name: "Lista", url: "./#convoca" },
-      { name: "Statistiche",  short_name: "Stats", url: "./#stats"   }
-    ],
-    prefer_related_applications: false
-  };
-  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/manifest+json'});
-  const link = Object.assign(document.createElement('link'), {rel:'manifest', href: URL.createObjectURL(blob)});
-  document.head.appendChild(link);
-
-  // ── SERVICE WORKER (inline blob) ──────────────────────────────
   if ('serviceWorker' in navigator) {
-    const swCode = `
-const CACHE = 'calcetto-v1';
-const OFFLINE = ['/'];
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(OFFLINE)).then(() => self.skipWaiting()));
-});
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
-});
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
-  );
-});
-    `;
-    const swBlob = new Blob([swCode], {type: 'application/javascript'});
-    const swURL  = URL.createObjectURL(swBlob);
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register(swURL, {scope: './'})
-        .then(() => console.log('✅ SW registrato'))
-        .catch(e => console.warn('SW non registrato (normale in locale):', e));
+      navigator.serviceWorker.register('./sw.js')
+        .then(r => console.log('✅ SW registrato:', r.scope))
+        .catch(e => console.warn('SW errore:', e));
     });
   }
-})();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
