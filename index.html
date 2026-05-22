@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a1628">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>⚽ Calcetto Giovedì</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080f1e;
+    --bg2: #0d1a2e;
+    --card: #111d33;
+    --card2: #152038;
+    --green: #00e676;
+    --green2: #00c853;
+    --yellow: #ffd600;
+    --red: #ff1744;
+    --blue: #2979ff;
+    --text: #e8f0fe;
+    --text2: #8ba3c7;
+    --border: rgba(0,230,118,0.18);
+    --shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+  /* SPLASH */
+  #splash {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    animation: splashOut 0.6s 1.8s forwards;
+  }
+  #splash .ball { font-size: 72px; animation: bounceBall 1s ease-in-out infinite; }
+  #splash h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--green); letter-spacing: 3px; margin-top: 16px; }
+  #splash p { color: var(--text2); font-size: 14px; margin-top: 8px; letter-spacing: 2px; text-transform: uppercase; }
+  @keyframes bounceBall { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+  @keyframes splashOut { to { opacity: 0; pointer-events: none; } }
+
+  /* LAYOUT */
+  .app { display: flex; flex-direction: column; height: 100vh; }
+  
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--bg2) 0%, #0d1f3a 100%);
+    border-bottom: 2px solid var(--border);
+    padding: 16px 20px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .header-logo { display: flex; align-items: center; gap: 10px; }
+  .header-logo .emoji { font-size: 28px; }
+  .header-logo h1 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--green); letter-spacing: 2px; line-height: 1; }
+  .header-logo span { font-size: 11px; color: var(--text2); letter-spacing: 3px; text-transform: uppercase; display: block; }
+  .header-badge {
+    background: var(--green); color: var(--bg); font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px; padding: 4px 10px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--bg2);
+    border-top: 2px solid var(--border);
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 8px 0 12px;
+    position: sticky; bottom: 0; z-index: 100;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+  }
+  .nav-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    background: none; border: none; color: var(--text2);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+    padding: 6px 12px; border-radius: 12px; transition: all 0.2s;
+  }
+  .nav-btn .icon { font-size: 22px; }
+  .nav-btn.active { color: var(--green); background: rgba(0,230,118,0.1); }
+  .nav-btn:active { transform: scale(0.92); }
+
+  /* CONTENT */
+  .content { flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 8px; }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeUp 0.3s ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 16px; margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--green);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* SECTION HOME */
+  .next-match {
+    background: linear-gradient(135deg, #0d2a1a 0%, #0d1f2a 100%);
+    border: 1.5px solid var(--green);
+    border-radius: 20px; padding: 20px; margin-bottom: 16px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .next-match::before {
+    content: '⚽'; position: absolute; font-size: 120px; opacity: 0.04;
+    right: -20px; top: 50%; transform: translateY(-50%);
+  }
+  .next-match .label { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--text2); margin-bottom: 6px; }
+  .next-match .date { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--green); line-height: 1; }
+  .next-match .time { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; color: var(--text2); letter-spacing: 1px; }
+  .next-match .place { font-size: 13px; color: var(--text2); margin-top: 8px; }
+  .next-match .place span { color: var(--text); font-weight: 600; }
+
+  .quick-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .qstat {
+    background: var(--card); border-radius: 14px; padding: 14px 10px;
+    text-align: center; border: 1px solid rgba(255,255,255,0.05);
+  }
+  .qstat .val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--green); line-height: 1; }
+  .qstat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-top: 2px; }
+
+  /* CONVOCAZIONI */
+  .convoca-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .convoca-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; }
+  .pill {
+    background: var(--green); color: var(--bg);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 13px; padding: 6px 14px; border-radius: 20px; border: none; cursor: pointer;
+    letter-spacing: 1px; transition: all 0.2s;
+  }
+  .pill:active { transform: scale(0.95); background: var(--green2); }
+  .pill.secondary { background: transparent; border: 1.5px solid var(--green); color: var(--green); }
+  .pill.red { background: transparent; border: 1.5px solid var(--red); color: var(--red); }
+
+  .player-list { display: flex; flex-direction: column; gap: 10px; }
+  .player-row {
+    background: var(--card); border-radius: 14px; padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.2s; cursor: pointer;
+  }
+  .player-row:active { transform: scale(0.98); }
+  .player-row.confirmed { border-color: rgba(0,230,118,0.3); background: rgba(0,230,118,0.05); }
+  .player-row.declined { border-color: rgba(255,23,68,0.2); opacity: 0.6; }
+  .player-avatar {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--card2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.1);
+  }
+  .player-row.confirmed .player-avatar { border-color: var(--green); }
+  .player-info { flex: 1; min-width: 0; }
+  .player-name { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .player-role { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .player-status {
+    font-size: 20px; flex-shrink: 0;
+  }
+  .status-bar {
+    display: flex; gap: 8px; margin-bottom: 16px;
+  }
+  .status-chip {
+    background: var(--card); border-radius: 20px; padding: 6px 12px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .status-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-green { background: var(--green); }
+  .dot-red { background: var(--red); }
+  .dot-yellow { background: var(--yellow); }
+
+  /* GOALS / STATS */
+  .stat-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+  .stat-tab {
+    background: var(--card); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 8px 16px; white-space: nowrap;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--text2); cursor: pointer;
+    transition: all 0.2s; border: none;
+  }
+  .stat-tab.active { background: var(--green); color: var(--bg); }
+
+  .scorers-list { display: flex; flex-direction: column; gap: 8px; }
+  .scorer-row {
+    background: var(--card); border-radius: 14px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .rank {
+    font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text2);
+    width: 28px; text-align: center; flex-shrink: 0;
+  }
+  .rank.gold { color: #ffd600; }
+  .rank.silver { color: #b0bec5; }
+  .rank.bronze { color: #ff7043; }
+  .scorer-info { flex: 1; }
+  .scorer-name { font-weight: 700; font-size: 15px; }
+  .scorer-detail { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .scorer-goals {
+    font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); line-height: 1;
+  }
+
+  .progress-bar-wrap { background: rgba(255,255,255,0.08); border-radius: 4px; height: 4px; margin-top: 8px; }
+  .progress-bar { height: 4px; border-radius: 4px; background: var(--green); }
+
+  /* PARTITE */
+  .match-card {
+    background: var(--card); border-radius: 16px; padding: 16px;
+    margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);
+  }
+  .match-meta { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .match-score {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .team-score { text-align: center; flex: 1; }
+  .team-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text2); margin-bottom: 6px; }
+  .score-num { font-family: 'Bebas Neue', sans-serif; font-size: 54px; line-height: 1; }
+  .score-sep { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--text2); padding-top: 8px; }
+  .match-scorers { font-size: 12px; color: var(--text2); text-align: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .match-scorers span { color: var(--text); font-weight: 600; }
+  .winner-tag {
+    display: inline-block; background: var(--green); color: var(--bg);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px;
+    padding: 2px 8px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; margin-left: 6px;
+  }
+  .annullata-tag {
+    display: inline-block; background: rgba(255,23,68,0.15); color: var(--red);
+    border: 1px solid rgba(255,23,68,0.3);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px;
+    padding: 2px 8px; border-radius: 10px; letter-spacing: 1px; text-transform: uppercase; margin-left: 6px;
+  }
+  .match-card.annullata {
+    opacity: 0.55; border-color: rgba(255,23,68,0.2);
+  }
+  .match-card.annullata .score-num { color: var(--text2) !important; }
+  .match-actions {
+    display: flex; gap: 8px; margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .match-action-btn {
+    flex: 1; padding: 7px 0; border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px;
+    letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s;
+  }
+  .match-action-btn:active { transform: scale(0.96); }
+  .match-btn-cancel { background: rgba(255,214,0,0.1); color: var(--yellow); border: 1px solid rgba(255,214,0,0.25); }
+  .match-btn-restore { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
+  .match-btn-delete { background: rgba(255,23,68,0.1); color: var(--red); border: 1px solid rgba(255,23,68,0.2); }
+
+  /* MEDIA */
+  .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .media-thumb {
+    background: var(--card2); border-radius: 12px; aspect-ratio: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 36px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .media-thumb:active { transform: scale(0.97); }
+  .media-thumb .media-label { font-size: 11px; color: var(--text2); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .media-thumb.add-new {
+    border: 2px dashed rgba(0,230,118,0.3); background: transparent; color: var(--green);
+  }
+  .media-date { position: absolute; bottom: 6px; right: 8px; font-size: 10px; color: var(--text2); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 500; display: flex; align-items: flex-end;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--card); border-radius: 24px 24px 0 0;
+    width: 100%; padding: 24px 20px 36px;
+    transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-handle { width: 40px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; margin: 0 auto 20px; }
+  .modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; margin-bottom: 20px; }
+  .form-field { margin-bottom: 16px; }
+  .form-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text2); margin-bottom: 8px; }
+  .form-field input, .form-field select, .form-field textarea {
+    width: 100%; background: var(--bg2); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 12px 14px; color: var(--text);
+    font-family: 'Barlow', sans-serif; font-size: 15px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: var(--green);
+  }
+  .form-field select option { background: var(--card); }
+  .form-actions { display: flex; gap: 10px; margin-top: 8px; }
+  .btn-full { width: 100%; padding: 14px; border-radius: 14px; border: none; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+  .btn-green { background: var(--green); color: var(--bg); }
+  .btn-green:active { background: var(--green2); transform: scale(0.98); }
+  .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.15); color: var(--text2); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--green); color: var(--bg); border-radius: 40px;
+    padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 14px; letter-spacing: 1px; z-index: 600;
+    opacity: 0; transition: all 0.3s; pointer-events: none; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* FAB */
+  .fab {
+    position: fixed; right: 18px; bottom: 82px; z-index: 200;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--green); color: var(--bg); border: none;
+    font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,230,118,0.4);
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .fab:active { transform: scale(0.92); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 0; height: 0; }
+
+  /* SCORER CHIPS SYSTEM */
+  .scorer-chips-area {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; min-height: 36px;
+  }
+  .scorer-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(0,230,118,0.15); border: 1px solid rgba(0,230,118,0.35);
+    border-radius: 20px; padding: 5px 10px 5px 12px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px;
+    color: var(--green); letter-spacing: 0.5px;
+  }
+  .scorer-chip .chip-remove {
+    background: none; border: none; color: rgba(0,230,118,0.6);
+    font-size: 15px; cursor: pointer; padding: 0; line-height: 1;
+    transition: color 0.15s;
+  }
+  .scorer-chip .chip-remove:hover { color: var(--red); }
+  .scorer-picker {
+    position: relative;
+  }
+  .scorer-picker-input {
+    width: 100%; background: var(--bg2); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 11px 14px; color: var(--text);
+    font-family: 'Barlow', sans-serif; font-size: 15px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .scorer-picker-input:focus { border-color: var(--green); }
+  .scorer-dropdown {
+    position: absolute; left: 0; right: 0; top: calc(100% + 4px);
+    background: var(--card2); border: 1px solid rgba(0,230,118,0.25);
+    border-radius: 12px; z-index: 300; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    display: none;
+  }
+  .scorer-dropdown.open { display: block; }
+  .scorer-dropdown-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; cursor: pointer;
+    font-size: 14px; font-weight: 600;
+    transition: background 0.15s; border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .scorer-dropdown-item:last-child { border-bottom: none; }
+  .scorer-dropdown-item:active, .scorer-dropdown-item:hover { background: rgba(0,230,118,0.1); }
+  .scorer-dropdown-item.already-added { opacity: 0.4; pointer-events: none; }
+  .scorer-gol-row {
+    display: flex; flex-direction: column; gap: 10px; padding: 12px 14px;
+    background: rgba(0,230,118,0.07); border-top: 1px solid rgba(0,230,118,0.2);
+  }
+  .scorer-gol-row .gol-player-name {
+    font-size: 14px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .scorer-gol-row .gol-controls {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .scorer-gol-row .gol-label {
+    font-size: 11px; color: var(--text2); text-transform: uppercase;
+    letter-spacing: 1px; flex: 1;
+  }
+  .scorer-stepper {
+    display: flex; align-items: center; gap: 0;
+    background: var(--bg2); border: 1.5px solid rgba(0,230,118,0.35);
+    border-radius: 10px; overflow: hidden;
+  }
+  .scorer-stepper-btn {
+    background: none; border: none; color: var(--green);
+    font-size: 22px; font-weight: 700; cursor: pointer;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s; flex-shrink: 0;
+  }
+  .scorer-stepper-btn:active { background: rgba(0,230,118,0.15); }
+  .scorer-gol-input {
+    width: 48px; background: transparent; border: none;
+    color: var(--text); font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+    outline: none; text-align: center; -moz-appearance: textfield;
+  }
+  .scorer-gol-input::-webkit-inner-spin-button,
+  .scorer-gol-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .scorer-gol-confirm {
+    flex: 1; background: var(--green); color: var(--bg); border: none; border-radius: 10px;
+    padding: 10px 14px; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px; cursor: pointer; letter-spacing: 1px;
+    text-transform: uppercase; transition: background 0.15s;
+  }
+  .scorer-gol-confirm:active { background: var(--green2); }
+  .scorer-no-results {
+    padding: 12px 14px; font-size: 13px; color: var(--text2); text-align: center;
+  }
+
+  /* DELETE BUTTON */
+  .btn-delete {
+    background: none; border: none; color: rgba(255,23,68,0.5);
+    font-size: 18px; cursor: pointer; padding: 6px; border-radius: 8px;
+    flex-shrink: 0; transition: all 0.2s;
+  }
+  .btn-delete:active { color: var(--red); transform: scale(0.9); background: rgba(255,23,68,0.1); }
+
+  /* PAGELLE */
+  .pagelle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .pagelle-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; }
+  .pagella-card {
+    background: var(--card); border-radius: 16px; padding: 14px 16px;
+    margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s;
+  }
+  .pagella-card.has-vote { border-color: rgba(0,230,118,0.25); }
+  .pagella-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .pagella-info { flex: 1; }
+  .pagella-name { font-weight: 700; font-size: 15px; }
+  .pagella-sub { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .vote-badge {
+    font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1;
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card2); color: var(--text2); flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .vote-badge.v-high { background: rgba(0,230,118,0.15); color: var(--green); border-color: rgba(0,230,118,0.4); }
+  .vote-badge.v-mid  { background: rgba(255,214,0,0.12); color: var(--yellow); border-color: rgba(255,214,0,0.3); }
+  .vote-badge.v-low  { background: rgba(255,23,68,0.12); color: var(--red); border-color: rgba(255,23,68,0.25); }
+  .pagella-controls { display: flex; gap: 8px; align-items: center; }
+  .vote-slider {
+    flex: 1; -webkit-appearance: none; appearance: none;
+    height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1);
+    outline: none; cursor: pointer;
+  }
+  .vote-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--green); cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,230,118,0.5);
+  }
+  .vote-label { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--green); width: 28px; text-align: center; }
+  .pagella-comment {
+    width: 100%; background: var(--bg2); border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 10px 12px; color: var(--text);
+    font-family: 'Barlow', sans-serif; font-size: 13px; outline: none;
+    resize: none; margin-top: 10px; transition: border-color 0.2s;
+  }
+  .pagella-comment:focus { border-color: var(--green); }
+  .pagella-comment::placeholder { color: var(--text2); }
+  .pagelle-avg-bar {
+    background: linear-gradient(135deg, #0d2a1a 0%, #0d1f2a 100%);
+    border: 1.5px solid var(--green); border-radius: 16px;
+    padding: 16px; margin-bottom: 16px; text-align: center;
+  }
+  .pagelle-avg-val { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--green); line-height: 1; }
+  .pagelle-avg-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--text2); margin-top: 4px; }
+  .pagelle-filter { display: flex; gap: 8px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+  .pagelle-filter-btn {
+    background: var(--card); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 7px 14px; white-space: nowrap;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--text2); cursor: pointer;
+    transition: all 0.2s; border: none;
+  }
+  .pagelle-filter-btn.active { background: var(--green); color: var(--bg); }
+
+  /* Chips row */
+  .chips-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: rgba(255,255,255,0.07); margin: 12px 0; }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 3px; color: var(--text2); margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="ball">⚽</div>
+  <h1>CALCETTO</h1>
+  <p>Giovedì Sera</p>
+</div>
+
+<div class="app">
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">
+      <div class="emoji">⚽</div>
+      <div>
+        <h1>CALCETTO</h1>
+        <span>Giovedì Sera</span>
+      </div>
+    </div>
+    <div class="header-badge">GIO 21:00</div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- HOME -->
+    <div class="section active" id="sec-home">
+      <div class="next-match">
+        <div class="label">Prossima Partita</div>
+        <div class="date" id="nextDate">—</div>
+        <div class="time">Ore 21:00</div>
+        <div class="place">📍 <span>Campo Sintetico Centro Sportivo</span></div>
+      </div>
+
+      <div class="quick-stats">
+        <div class="qstat">
+          <div class="val" id="home-confermati">0</div>
+          <div class="lbl">✅ Confermati</div>
+        </div>
+        <div class="qstat">
+          <div class="val" id="home-partite">0</div>
+          <div class="lbl">🏆 Partite</div>
+        </div>
+        <div class="qstat">
+          <div class="val" id="home-gol">0</div>
+          <div class="lbl">⚽ Gol</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 Top Marcatori</div>
+        <div id="home-top3" class="scorers-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📅 Ultimo Risultato</div>
+        <div id="home-lastmatch"></div>
+      </div>
+    </div>
+
+    <!-- CONVOCAZIONI -->
+    <div class="section" id="sec-convoca">
+      <div class="convoca-header">
+        <h2>Convocazioni</h2>
+        <button class="pill" onclick="openModal('modal-player')">+ Giocatore</button>
+      </div>
+      <div class="status-bar" id="convoca-status"></div>
+      <div class="player-list" id="player-list"></div>
+    </div>
+
+    <!-- STATISTICHE -->
+    <div class="section" id="sec-stats">
+      <div class="section-label">Classifica Stagione 2024-25</div>
+      <div class="stat-tabs">
+        <button class="stat-tab active" onclick="switchStatTab('gol', this)">⚽ Gol</button>
+        <button class="stat-tab" onclick="switchStatTab('presenze', this)">📋 Presenze</button>
+        <button class="stat-tab" onclick="switchStatTab('mvp', this)">⭐ MVP</button>
+        <button class="stat-tab" onclick="switchStatTab('vinte', this)">🏆 Vinte</button>
+      </div>
+      <div class="scorers-list" id="stats-list"></div>
+    </div>
+
+    <!-- PARTITE -->
+    <div class="section" id="sec-partite">
+      <div class="convoca-header">
+        <h2>Storico Partite</h2>
+        <button class="pill" onclick="openModal('modal-match')">+ Partita</button>
+      </div>
+      <div id="matches-list"></div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="section" id="sec-media">
+      <div class="convoca-header">
+        <h2>Foto & Video</h2>
+        <button class="pill" onclick="openModal('modal-media')">+ Aggiungi</button>
+      </div>
+      <div class="media-grid" id="media-grid"></div>
+    </div>
+
+    <!-- PAGELLE -->
+    <div class="section" id="sec-pagelle">
+      <div class="pagelle-avg-bar">
+        <div class="pagelle-avg-val" id="pagelle-avg">—</div>
+        <div class="pagelle-avg-lbl">Media Voti Squadra</div>
+      </div>
+      <div class="pagella-card" style="margin-bottom:14px;background:rgba(0,230,118,0.05);border-color:rgba(0,230,118,0.2)">
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">
+          💡 <strong style="color:var(--text)">Come funziona:</strong> assegna un voto da 1 a 10 e scrivi un commento per ogni giocatore. I voti vengono salvati automaticamente.
+        </div>
+      </div>
+      <div class="pagelle-filter">
+        <button class="pagelle-filter-btn active" onclick="filterPagelle('tutti', this)">Tutti</button>
+        <button class="pagelle-filter-btn" onclick="filterPagelle('votati', this)">✅ Votati</button>
+        <button class="pagelle-filter-btn" onclick="filterPagelle('nonvotati', this)">⏳ Da votare</button>
+      </div>
+      <div id="pagelle-list"></div>
+    </div>
+
+  </div><!-- end content -->
+
+  <!-- NAV -->
+  <nav>
+    <button class="nav-btn active" onclick="showSection('home', this)">
+      <span class="icon">🏠</span>Home
+    </button>
+    <button class="nav-btn" onclick="showSection('convoca', this)">
+      <span class="icon">📋</span>Lista
+    </button>
+    <button class="nav-btn" onclick="showSection('stats', this)">
+      <span class="icon">📊</span>Stats
+    </button>
+    <button class="nav-btn" onclick="showSection('partite', this)">
+      <span class="icon">🏆</span>Partite
+    </button>
+    <button class="nav-btn" onclick="showSection('media', this)">
+      <span class="icon">📸</span>Media
+    </button>
+    <button class="nav-btn" onclick="showSection('pagelle', this)">
+      <span class="icon">⭐</span>Pagelle
+    </button>
+  </nav>
+</div>
+
+<!-- MODALS -->
+<!-- Add Player -->
+<div class="modal-overlay" id="modal-player" onclick="closeModalOutside(event, 'modal-player')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Aggiungi Giocatore</h3>
+    <div class="form-field">
+      <label>Nome</label>
+      <input type="text" id="f-name" placeholder="es. Marco Rossi">
+    </div>
+    <div class="form-field">
+      <label>Risposta Convocazione</label>
+      <select id="f-status">
+        <option value="pending">⏳ In attesa</option>
+        <option value="confirmed">✅ Confermato</option>
+        <option value="declined">❌ Non disponibile</option>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-player')">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addPlayer()">Aggiungi</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Match -->
+<div class="modal-overlay" id="modal-match" onclick="closeModalOutside(event, 'modal-match')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Aggiungi Partita</h3>
+    <div class="form-field">
+      <label>Data</label>
+      <input type="date" id="m-date">
+    </div>
+    <div style="display:flex;gap:10px">
+      <div class="form-field" style="flex:1">
+        <label>Squadra A</label>
+        <input type="text" id="m-teamA" placeholder="Bianchi" value="Bianchi">
+      </div>
+      <div class="form-field" style="flex:1">
+        <label>Squadra B</label>
+        <input type="text" id="m-teamB" placeholder="Rossi" value="Rossi">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div class="form-field" style="flex:1">
+        <label>Gol A</label>
+        <input type="number" id="m-goalA" min="0" value="0">
+      </div>
+      <div class="form-field" style="flex:1">
+        <label>Gol B</label>
+        <input type="number" id="m-goalB" min="0" value="0">
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Marcatori</label>
+      <div class="scorer-chips-area" id="scorer-chips"></div>
+      <div class="scorer-picker">
+        <input type="text" class="scorer-picker-input" id="scorer-search"
+          placeholder="Cerca giocatore…" autocomplete="off"
+          oninput="scorerSearch(this.value)" onfocus="scorerSearch(this.value)">
+        <div class="scorer-dropdown" id="scorer-dropdown">
+          <div id="scorer-dropdown-list"></div>
+        </div>
+      </div>
+      <!-- Pannello gol: appare sotto la ricerca dopo aver scelto il giocatore -->
+      <div id="scorer-gol-row" style="display:none; margin-top:10px; background:rgba(0,230,118,0.07); border:1.5px solid rgba(0,230,118,0.3); border-radius:14px; padding:14px;">
+        <div class="gol-player-name" id="scorer-gol-name" style="margin-bottom:12px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;"></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;flex:1;">⚽ Gol segnati</span>
+          <div class="scorer-stepper">
+            <button class="scorer-stepper-btn" onclick="stepGoals(-1)">−</button>
+            <input type="number" class="scorer-gol-input" id="scorer-gol-count" min="1" max="20" value="1">
+            <button class="scorer-stepper-btn" onclick="stepGoals(1)">+</button>
+          </div>
+          <button class="scorer-gol-confirm" onclick="confirmScorer()">✓ Ok</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-match')">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addMatch()">Salva</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Media -->
+<div class="modal-overlay" id="modal-media" onclick="closeModalOutside(event, 'modal-media')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Aggiungi Media</h3>
+    <div class="form-field">
+      <label>Tipo</label>
+      <select id="med-type">
+        <option value="📸">📸 Foto</option>
+        <option value="🎥">🎥 Video</option>
+        <option value="🏆">🏆 Premio / Momento</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Descrizione</label>
+      <input type="text" id="med-desc" placeholder="es. Gol di Marco, 12 Giu">
+    </div>
+    <div class="form-field">
+      <label>Data</label>
+      <input type="date" id="med-date">
+    </div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:16px">Per caricare file veri, installa l'app come PWA sul telefono e usa la fotocamera!</p>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-media')">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addMedia()">Aggiungi</button>
+    </div>
+  </div>
+</div>
+
+<!-- Goal Modal -->
+<div class="modal-overlay" id="modal-goal" onclick="closeModalOutside(event, 'modal-goal')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3 id="modal-goal-title">Segna Gol</h3>
+    <div class="form-field">
+      <label>Gol Segnati Oggi</label>
+      <input type="number" id="g-goals" min="0" value="1">
+    </div>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-goal')">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="saveGoal()">⚽ Salva</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="modal-delete" onclick="closeModalOutside(event, 'modal-delete')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Elimina Giocatore</h3>
+    <p style="color:var(--text2);font-size:15px;margin-bottom:20px">Vuoi davvero eliminare <strong id="delete-player-name" style="color:var(--text)"></strong>? Questa azione non può essere annullata.</p>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-delete')">Annulla</button>
+      <button class="btn-full" style="flex:2;background:var(--red);color:#fff;border-radius:14px;padding:14px;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase" onclick="confirmDelete()">🗑️ Elimina</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Match Modal -->
+<div class="modal-overlay" id="modal-delete-match" onclick="closeModalOutside(event, 'modal-delete-match')">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Elimina Partita</h3>
+    <p style="color:var(--text2);font-size:15px;margin-bottom:20px">Vuoi davvero eliminare questa partita? I gol e le presenze dei marcatori <strong style="color:var(--text)">non verranno modificati</strong>.</p>
+    <div class="form-actions">
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-delete-match')">Annulla</button>
+      <button class="btn-full" style="flex:2;background:var(--red);color:#fff;border-radius:14px;padding:14px;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase" onclick="confirmDeleteMatch()">🗑️ Elimina</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+let state = {
+  players: [
+    { id:1,  name:"Massi",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🦁" },
+    { id:2,  name:"Salva",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"⚡" },
+    { id:3,  name:"Teo",             status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🔥" },
+    { id:4,  name:"Vale",            status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🌟" },
+    { id:5,  name:"Lele",            status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🚀" },
+    { id:6,  name:"Giorgio",         status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🦊" },
+    { id:7,  name:"Dany",            status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"💥" },
+    { id:8,  name:"Ale Brag",        status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🎯" },
+    { id:9,  name:"Lollo",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"😎" },
+    { id:10, name:"Max Brag",        status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"💪" },
+    { id:11, name:"Joshua",          status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🦅" },
+    { id:12, name:"Chapo",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🐉" },
+    { id:13, name:"Sergio",          status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"⚽" },
+    { id:14, name:"Stefano (coll.)", status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"💼" },
+    { id:15, name:"Samu",            status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🏃" },
+    { id:16, name:"Dadde",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🗿" },
+    { id:17, name:"Diego",           status:"pending",    goals:0, presenze:0, mvp:0, vinte:0, emoji:"🌊" },
+  ],
+  matches: [],
+  media: [
+    { id:1, type:"📸", desc:"Prima partita! 🔥", date:"Giu 2025" },
+    { id:2, type:"🎥", desc:"Highlights Giovedì", date:"Giu 2025" },
+  ],
+  pagelle: {}, // { playerId: { voto: 7, commento: '...' } }
+  selectedPlayer: null,
+  playerToDelete: null,
+};
+
+// ===== NEXT THURSDAY =====
+function getNextThursday() {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = (4 - day + 7) % 7 || 7;
+  const next = new Date(now);
+  next.setDate(now.getDate() + diff);
+  const months = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+  return `${next.getDate()} ${months[next.getMonth()]}`;
+}
+function getTodayStr() {
+  const d = new Date(); const months = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+  return `${d.getDate()} ${months[d.getMonth()]}`;
+}
+document.getElementById('nextDate').textContent = getNextThursday();
+// prefill dates
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('m-date').value = today;
+document.getElementById('med-date').value = today;
+
+// ===== SECTION NAV =====
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='home') renderHome();
+  if(name==='convoca') renderPlayers();
+  if(name==='stats') renderStats('gol');
+  if(name==='partite') renderMatches();
+  if(name==='media') renderMedia();
+  if(name==='pagelle') renderPagelle('tutti');
+}
+
+// ===== RENDER HOME =====
+function renderHome() {
+  const conf = state.players.filter(p=>p.status==='confirmed').length;
+  document.getElementById('home-confermati').textContent = conf;
+  const totalMatches = state.matches.filter(m => !m.annullata).length;
+  document.getElementById('home-partite').textContent = totalMatches;
+  const totalGols = state.players.reduce((a,p)=>a+p.goals,0);
+  document.getElementById('home-gol').textContent = totalGols;
+
+  // top 3
+  const top3 = [...state.players].sort((a,b)=>b.goals-a.goals).slice(0,3);
+  const maxG = top3[0]?.goals || 1;
+  document.getElementById('home-top3').innerHTML = top3.map((p,i)=>{
+    const medals = ['🥇','🥈','🥉'];
+    return `<div class="scorer-row" style="margin-bottom:8px">
+      <div class="rank ${i===0?'gold':i===1?'silver':'bronze'}">${medals[i]}</div>
+      <div style="font-size:22px">${p.emoji}</div>
+      <div class="scorer-info">
+        <div class="scorer-name">${p.name}</div>
+        <div class="scorer-detail">${p.presenze} presenze</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.round(p.goals/maxG*100)}%"></div></div>
+      </div>
+      <div class="scorer-goals">${p.goals}</div>
+    </div>`;
+  }).join('');
+
+  // last match
+  const lastPlayed = state.matches.find(m => !m.annullata);
+  if(lastPlayed) {
+    const m = lastPlayed;
+    const winner = m.goalA > m.goalB ? m.teamA : m.goalA < m.goalB ? m.teamB : null;
+    document.getElementById('home-lastmatch').innerHTML = `
+      <div class="match-meta"><span>${formatDate(m.date)}</span></div>
+      <div class="match-score">
+        <div class="team-score">
+          <div class="team-name">${m.teamA}${winner===m.teamA?'<span class="winner-tag">WIN</span>':''}</div>
+          <div class="score-num" style="color:${winner===m.teamA?'var(--green)':'var(--text)'}">${m.goalA}</div>
+        </div>
+        <div class="score-sep">-</div>
+        <div class="team-score">
+          <div class="team-name">${m.teamB}${winner===m.teamB?'<span class="winner-tag">WIN</span>':''}</div>
+          <div class="score-num" style="color:${winner===m.teamB?'var(--green)':'var(--text)'}">${m.goalB}</div>
+        </div>
+      </div>
+      ${m.scorers?`<div class="match-scorers">⚽ ${m.scorers}</div>`:''}
+    `;
+  } else {
+    document.getElementById('home-lastmatch').innerHTML = `<div style="text-align:center;color:var(--text2);padding:10px">Nessuna partita registrata</div>`;
+  }
+}
+
+// ===== RENDER PLAYERS =====
+function renderPlayers() {
+  const conf = state.players.filter(p=>p.status==='confirmed').length;
+  const dec  = state.players.filter(p=>p.status==='declined').length;
+  const pend = state.players.filter(p=>p.status==='pending').length;
+  document.getElementById('convoca-status').innerHTML = `
+    <div class="status-chip"><div class="dot dot-green"></div>${conf} Sì</div>
+    <div class="status-chip"><div class="dot dot-red"></div>${dec} No</div>
+    <div class="status-chip"><div class="dot dot-yellow"></div>${pend} Forse</div>
+  `;
+  const ul = document.getElementById('player-list');
+  ul.innerHTML = state.players.map(p => {
+    const statusIcon = p.status==='confirmed'?'✅':p.status==='declined'?'❌':'⏳';
+    const cls = p.status==='confirmed'?'confirmed':p.status==='declined'?'declined':'';
+    return `<div class="player-row ${cls}">
+      <div class="player-avatar" onclick="cycleStatus(${p.id})">${p.emoji}</div>
+      <div class="player-info" onclick="cycleStatus(${p.id})">
+        <div class="player-name">${p.name}</div>
+        <div class="player-role">⚽ ${p.goals} gol · 📋 ${p.presenze} presenze</div>
+      </div>
+      <div class="player-status" onclick="cycleStatus(${p.id})">${statusIcon}</div>
+      <button class="btn-delete" onclick="askDeletePlayer(${p.id})" title="Elimina">🗑️</button>
+    </div>`;
+  }).join('');
+}
+
+function cycleStatus(id) {
+  const p = state.players.find(x=>x.id===id);
+  if(!p) return;
+  const cycle = {pending:'confirmed', confirmed:'declined', declined:'pending'};
+  p.status = cycle[p.status];
+  renderPlayers();
+  renderHome();
+  const labels = {confirmed:'✅ Confermato!', declined:'❌ Non disponibile', pending:'⏳ In attesa'};
+  showToast(`${p.name}: ${labels[p.status]}`);
+}
+
+// ===== RENDER STATS =====
+let currentStatTab = 'gol';
+function switchStatTab(tab, btn) {
+  currentStatTab = tab;
+  document.querySelectorAll('.stat-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderStats(tab);
+}
+
+function renderStats(tab) {
+  const keys = {gol:'goals', presenze:'presenze', mvp:'mvp', vinte:'vinte'};
+  const key = keys[tab] || 'goals';
+  const sorted = [...state.players].sort((a,b)=>b[key]-a[key]);
+  const maxVal = sorted[0]?.[key] || 1;
+  const icons = {gol:'⚽', presenze:'📋', mvp:'⭐', vinte:'🏆'};
+  document.getElementById('stats-list').innerHTML = sorted.map((p,i)=>{
+    const rankClass = i===0?'gold':i===1?'silver':i===2?'bronze':'';
+    return `<div class="scorer-row" style="margin-bottom:8px">
+      <div class="rank ${rankClass}">${i+1}</div>
+      <div style="font-size:20px">${p.emoji}</div>
+      <div class="scorer-info">
+        <div class="scorer-name">${p.name}</div>
+        <div class="scorer-detail">⚽ ${p.goals} gol · 📋 ${p.presenze} presenze</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.round(p[key]/maxVal*100)}%"></div></div>
+      </div>
+      <div class="scorer-goals">${icons[tab]} ${p[key]}</div>
+    </div>`;
+  }).join('');
+}
+
+// ===== RENDER MATCHES =====
+function renderMatches() {
+  const el = document.getElementById('matches-list');
+  if(state.matches.length===0){ el.innerHTML=`<div style="text-align:center;color:var(--text2);padding:30px">Nessuna partita ancora. Aggiungila!</div>`; return; }
+  el.innerHTML = state.matches.map(m=>{
+    const isAnnullata = m.annullata === true;
+    const winner = !isAnnullata && (m.goalA>m.goalB?m.teamA:m.goalA<m.goalB?m.teamB:null);
+    const statusLabel = isAnnullata
+      ? `<span class="annullata-tag">⚠️ Non giocata</span>`
+      : (winner ? '🏆 '+winner : '🤝 Pareggio');
+    return `<div class="match-card ${isAnnullata?'annullata':''}">
+      <div class="match-meta">
+        <span>📅 ${formatDate(m.date)}</span>
+        <span>${statusLabel}</span>
+      </div>
+      <div class="match-score">
+        <div class="team-score">
+          <div class="team-name">${m.teamA}${!isAnnullata&&winner===m.teamA?'<span class="winner-tag">WIN</span>':''}</div>
+          <div class="score-num" style="color:${!isAnnullata&&winner===m.teamA?'var(--green)':'var(--text)'}">${isAnnullata?'—':m.goalA}</div>
+        </div>
+        <div class="score-sep">VS</div>
+        <div class="team-score">
+          <div class="team-name">${m.teamB}${!isAnnullata&&winner===m.teamB?'<span class="winner-tag">WIN</span>':''}</div>
+          <div class="score-num" style="color:${!isAnnullata&&winner===m.teamB?'var(--green)':'var(--text)'}">${isAnnullata?'—':m.goalB}</div>
+        </div>
+      </div>
+      ${!isAnnullata&&m.scorers?`<div class="match-scorers">⚽ <span>${m.scorers}</span></div>`:''}
+      <div class="match-actions">
+        ${isAnnullata
+          ? `<button class="match-action-btn match-btn-restore" onclick="restoreMatch(${m.id})">✅ Ripristina</button>`
+          : `<button class="match-action-btn match-btn-cancel" onclick="cancelMatch(${m.id})">⚠️ Non giocata</button>`
+        }
+        <button class="match-action-btn match-btn-delete" onclick="askDeleteMatch(${m.id})">🗑️ Elimina</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== RENDER MEDIA =====
+function renderMedia() {
+  const el = document.getElementById('media-grid');
+  const addBtn = `<div class="media-thumb add-new" onclick="openModal('modal-media')">
+    <div style="font-size:32px">+</div>
+    <div class="media-label">Aggiungi</div>
+  </div>`;
+  el.innerHTML = state.media.map(m=>`
+    <div class="media-thumb" onclick="showToast('${m.desc}')">
+      <div style="font-size:40px">${m.type}</div>
+      <div class="media-label">${m.desc.substring(0,16)}</div>
+      <div class="media-date">${m.date}</div>
+    </div>
+  `).join('') + addBtn;
+}
+
+// ===== MODALS =====
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function closeModalOutside(e, id) { if(e.target===document.getElementById(id)) closeModal(id); }
+
+// ===== ADD PLAYER =====
+function addPlayer() {
+  const name = document.getElementById('f-name').value.trim();
+  if(!name) { showToast('Inserisci un nome!'); return; }
+  const emojis = ['😎','🦊','💪','🚀','🦅','🐉','⚡','🌟','🔥','🎯','🦁','🏋️'];
+  state.players.push({
+    id: Date.now(), name,
+    status: document.getElementById('f-status').value,
+    goals:0, presenze:0, mvp:0, vinte:0,
+    emoji: emojis[Math.floor(Math.random()*emojis.length)]
+  });
+  closeModal('modal-player');
+  document.getElementById('f-name').value = '';
+  renderPlayers();
+  showToast('👤 ' + name + ' aggiunto!');
+}
+
+// ===== SCORER PICKER =====
+let scorerSelection = []; // [{id, name, goals}]
+let scorerPendingId = null;
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  if(id === 'modal-match') {
+    scorerSelection = [];
+    scorerPendingId = null;
+    renderScorerChips();
+    document.getElementById('scorer-search').value = '';
+    document.getElementById('scorer-dropdown').classList.remove('open');
+    document.getElementById('scorer-gol-row').style.display = 'none';
+    document.getElementById('scorer-gol-name').innerHTML = '';
+  }
+}
+
+function scorerSearch(val) {
+  const dropdown = document.getElementById('scorer-dropdown');
+  const list = document.getElementById('scorer-dropdown-list');
+  const golRow = document.getElementById('scorer-gol-row');
+  golRow.style.display = 'none';
+  scorerPendingId = null;
+
+  const q = val.trim().toLowerCase();
+  const filtered = state.players.filter(p => p.name.toLowerCase().includes(q));
+
+  if(filtered.length === 0) {
+    list.innerHTML = `<div class="scorer-no-results">Nessun giocatore trovato</div>`;
+    dropdown.classList.add('open');
+    return;
+  }
+
+  list.innerHTML = filtered.map(p => {
+    const already = scorerSelection.find(s => s.id === p.id);
+    return `<div class="scorer-dropdown-item ${already?'already-added':''}" onclick="selectScorer(${p.id})">
+      <span style="font-size:18px">${p.emoji}</span>
+      <span style="flex:1">${p.name}</span>
+      ${already ? `<span style="font-size:11px;color:var(--green)">⚽ ${already.goals}</span>` : ''}
+    </div>`;
+  }).join('');
+  dropdown.classList.add('open');
+}
+
+function selectScorer(id) {
+  const p = state.players.find(x => x.id === id);
+  if(!p) return;
+  scorerPendingId = id;
+  document.getElementById('scorer-gol-name').innerHTML = `<span style="font-size:20px">${p.emoji}</span> ${p.name}`;
+  document.getElementById('scorer-gol-count').value = 1;
+  document.getElementById('scorer-gol-row').style.display = 'block';
+  // chiudi il dropdown e svuota la ricerca
+  document.getElementById('scorer-dropdown').classList.remove('open');
+  document.getElementById('scorer-dropdown-list').innerHTML = '';
+  document.getElementById('scorer-search').value = '';
+}
+
+function stepGoals(delta) {
+  const inp = document.getElementById('scorer-gol-count');
+  let val = parseInt(inp.value) || 1;
+  val = Math.max(1, Math.min(20, val + delta));
+  inp.value = val;
+}
+
+function confirmScorer() {
+  const id = scorerPendingId;
+  if(!id) return;
+  const p = state.players.find(x => x.id === id);
+  if(!p) return;
+  const goals = parseInt(document.getElementById('scorer-gol-count').value) || 1;
+  const existing = scorerSelection.find(s => s.id === id);
+  if(existing) { existing.goals = goals; }
+  else { scorerSelection.push({ id, name: p.name, goals }); }
+  scorerPendingId = null;
+  document.getElementById('scorer-search').value = '';
+  document.getElementById('scorer-dropdown').classList.remove('open');
+  document.getElementById('scorer-gol-row').style.display = 'none';
+  document.getElementById('scorer-gol-name').innerHTML = '';
+  renderScorerChips();
+}
+
+function renderScorerChips() {
+  const p = state.players;
+  document.getElementById('scorer-chips').innerHTML = scorerSelection.map(s => {
+    const pl = p.find(x => x.id === s.id);
+    return `<div class="scorer-chip">
+      ${pl ? pl.emoji : ''} ${s.name} <strong>⚽${s.goals}</strong>
+      <button class="chip-remove" onclick="removeScorer(${s.id})">×</button>
+    </div>`;
+  }).join('');
+}
+
+function removeScorer(id) {
+  scorerSelection = scorerSelection.filter(s => s.id !== id);
+  renderScorerChips();
+}
+
+// close dropdown on outside click
+document.addEventListener('click', function(e) {
+  const dp = document.getElementById('scorer-dropdown');
+  const inp = document.getElementById('scorer-search');
+  if(dp && inp && !dp.contains(e.target) && e.target !== inp) {
+    dp.classList.remove('open');
+  }
+});
+
+// ===== ADD MATCH =====
+function addMatch() {
+  const date = document.getElementById('m-date').value;
+  const teamA = document.getElementById('m-teamA').value || 'Bianchi';
+  const teamB = document.getElementById('m-teamB').value || 'Rossi';
+  const goalA = parseInt(document.getElementById('m-goalA').value)||0;
+  const goalB = parseInt(document.getElementById('m-goalB').value)||0;
+  // build scorers string from chips
+  const scorers = scorerSelection.map(s => `${s.name}${s.goals>1?' '+s.goals:''}`).join(', ');
+  state.matches.unshift({ id:Date.now(), date, teamA, teamB, goalA, goalB, scorers });
+  // update goals/presenze from chip selection
+  scorerSelection.forEach(s => {
+    const pl = state.players.find(p => p.id === s.id);
+    if(pl) { pl.goals += s.goals; pl.presenze++; }
+  });
+  closeModal('modal-match');
+  scorerSelection = [];
+  renderScorerChips();
+  renderMatches();
+  renderHome();
+  showToast('🏆 Partita salvata!');
+}
+
+// ===== ADD MEDIA =====
+function addMedia() {
+  const type = document.getElementById('med-type').value;
+  const desc = document.getElementById('med-desc').value.trim() || 'Media';
+  const dateRaw = document.getElementById('med-date').value;
+  const d = dateRaw ? new Date(dateRaw) : new Date();
+  const months = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+  const dateStr = `${d.getDate()} ${months[d.getMonth()]}`;
+  state.media.unshift({ id:Date.now(), type, desc, date:dateStr });
+  closeModal('modal-media');
+  renderMedia();
+  showToast('📸 Media aggiunto!');
+}
+
+// ===== DELETE PLAYER =====
+// ===== MATCH ACTIONS =====
+let matchToDelete = null;
+
+function askDeleteMatch(id) {
+  matchToDelete = id;
+  openModal('modal-delete-match');
+}
+
+function confirmDeleteMatch() {
+  state.matches = state.matches.filter(m => m.id !== matchToDelete);
+  matchToDelete = null;
+  closeModal('modal-delete-match');
+  renderMatches();
+  renderHome();
+  showToast('🗑️ Partita eliminata');
+}
+
+function cancelMatch(id) {
+  const m = state.matches.find(x => x.id === id);
+  if(!m) return;
+  m.annullata = true;
+  renderMatches();
+  renderHome();
+  showToast('⚠️ Partita segnata come non giocata');
+}
+
+function restoreMatch(id) {
+  const m = state.matches.find(x => x.id === id);
+  if(!m) return;
+  m.annullata = false;
+  renderMatches();
+  renderHome();
+  showToast('✅ Partita ripristinata');
+}
+
+// ===== DELETE PLAYER =====
+function askDeletePlayer(id) {
+  const p = state.players.find(x=>x.id===id);
+  if(!p) return;
+  state.playerToDelete = id;
+  document.getElementById('delete-player-name').textContent = p.name;
+  openModal('modal-delete');
+}
+
+function confirmDelete() {
+  const id = state.playerToDelete;
+  const p = state.players.find(x=>x.id===id);
+  if(!p) return;
+  const name = p.name;
+  state.players = state.players.filter(x=>x.id!==id);
+  delete state.pagelle[id];
+  state.playerToDelete = null;
+  closeModal('modal-delete');
+  renderPlayers();
+  renderHome();
+  showToast('🗑️ ' + name + ' eliminato');
+}
+
+// ===== PAGELLE =====
+let pagelleFilter = 'tutti';
+
+function filterPagelle(filter, btn) {
+  pagelleFilter = filter;
+  document.querySelectorAll('.pagelle-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPagelle(filter);
+}
+
+function getVoteClass(v) {
+  if(v >= 7) return 'v-high';
+  if(v >= 5) return 'v-mid';
+  return 'v-low';
+}
+
+function renderPagelle(filter) {
+  filter = filter || pagelleFilter;
+  let players = [...state.players];
+  if(filter === 'votati')    players = players.filter(p => state.pagelle[p.id]?.voto);
+  if(filter === 'nonvotati') players = players.filter(p => !state.pagelle[p.id]?.voto);
+
+  // avg
+  const voted = state.players.filter(p => state.pagelle[p.id]?.voto);
+  if(voted.length > 0) {
+    const avg = voted.reduce((a,p)=>a+(state.pagelle[p.id].voto||0),0) / voted.length;
+    document.getElementById('pagelle-avg').textContent = avg.toFixed(1);
+  } else {
+    document.getElementById('pagelle-avg').textContent = '—';
+  }
+
+  const el = document.getElementById('pagelle-list');
+  if(players.length === 0) {
+    el.innerHTML = `<div style="text-align:center;color:var(--text2);padding:30px">Nessun giocatore in questa categoria.</div>`;
+    return;
+  }
+
+  el.innerHTML = players.map(p => {
+    const pg = state.pagelle[p.id] || { voto: 0, commento: '' };
+    const hasVote = pg.voto > 0;
+    const voteClass = hasVote ? getVoteClass(pg.voto) : '';
+    const voteDisplay = hasVote ? pg.voto : '—';
+    return `<div class="pagella-card ${hasVote ? 'has-vote' : ''}" id="pagella-${p.id}">
+      <div class="pagella-top">
+        <div class="player-avatar">${p.emoji}</div>
+        <div class="pagella-info">
+          <div class="pagella-name">${p.name}</div>
+          <div class="pagella-sub">⚽ ${p.goals} gol · 📋 ${p.presenze} pres.</div>
+        </div>
+        <div class="vote-badge ${voteClass}" id="vbadge-${p.id}">${voteDisplay}</div>
+      </div>
+      <div class="pagella-controls">
+        <span style="font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;flex-shrink:0">Voto</span>
+        <input type="range" class="vote-slider" min="1" max="10" value="${pg.voto||5}"
+          oninput="updateVoto(${p.id}, this.value)"
+          onchange="updateVoto(${p.id}, this.value)">
+        <span class="vote-label" id="vlabel-${p.id}">${pg.voto||5}</span>
+      </div>
+      <textarea class="pagella-comment" rows="2" placeholder="Commento su ${p.name}…"
+        oninput="updateCommento(${p.id}, this.value)">${pg.commento||''}</textarea>
+    </div>`;
+  }).join('');
+}
+
+function updateVoto(id, val) {
+  val = parseInt(val);
+  if(!state.pagelle[id]) state.pagelle[id] = { voto: 0, commento: '' };
+  state.pagelle[id].voto = val;
+  const badge = document.getElementById('vbadge-'+id);
+  const label = document.getElementById('vlabel-'+id);
+  const card  = document.getElementById('pagella-'+id);
+  if(badge) { badge.textContent = val; badge.className = 'vote-badge ' + getVoteClass(val); }
+  if(label) label.textContent = val;
+  if(card)  card.classList.add('has-vote');
+  // update avg
+  const voted = state.players.filter(p => state.pagelle[p.id]?.voto);
+  if(voted.length > 0) {
+    const avg = voted.reduce((a,p)=>a+(state.pagelle[p.id].voto||0),0) / voted.length;
+    document.getElementById('pagelle-avg').textContent = avg.toFixed(1);
+  }
+}
+
+function updateCommento(id, val) {
+  if(!state.pagelle[id]) state.pagelle[id] = { voto: 0, commento: '' };
+  state.pagelle[id].commento = val;
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ===== UTILS =====
+function formatDate(str) {
+  if(!str) return '';
+  const d = new Date(str+'T00:00:00');
+  const months = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+  const days = ["Dom","Lun","Mar","Mer","Gio","Ven","Sab"];
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+}
+
+// ===== INIT =====
+renderHome();
+renderPlayers();
+renderStats('gol');
+renderPagelle('tutti');
+
+// Remove splash
+setTimeout(()=>{ const s=document.getElementById('splash'); if(s) s.remove(); }, 2400);
+</script>
+</body>
+</html>
