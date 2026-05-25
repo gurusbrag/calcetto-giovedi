@@ -257,6 +257,7 @@
         <div class="qstat"><div class="val" id="home-partite">—</div><div class="lbl">🏆 Partite</div></div>
         <div class="qstat"><div class="val" id="home-gol">—</div><div class="lbl">⚽ Gol Tot.</div></div>
       </div>
+      <div id="home-banner-dieci"></div>
       <div class="card"><div class="card-title">📊 Top Marcatori</div><div id="home-top3" class="scorers-list"></div></div>
       <div class="card"><div class="card-title">📅 Ultimo Risultato</div><div id="home-lastmatch"></div></div>
     </div>
@@ -438,7 +439,24 @@ function refresh(){
 
 // ── HOME ──────────────────────────────────────────────────────
 function renderHome(){
-  document.getElementById('home-confermati').textContent=players.filter(p=>p.status==='confirmed').length;
+  const conf=players.filter(p=>p.status==='confirmed').length;
+  document.getElementById('home-confermati').textContent=conf;
+
+  // Banner 10 giocatori nella HOME
+  const homeBanner = document.getElementById('home-banner-dieci');
+  if(homeBanner){
+    if(conf >= 10){
+      const confNames = players.filter(p=>p.status==='confirmed').map(p=>p.name).join('  ·  ');
+      homeBanner.innerHTML = `<div class="banner-dieci" style="margin-bottom:14px">
+        <span class="banner-emoji">🎉</span>
+        <div class="banner-title">SIAMO IN 10! SI GIOCA!</div>
+        <div class="banner-sub">Giovedì si scende in campo 💪</div>
+        <div class="banner-names">${confNames}</div>
+      </div>`;
+    } else {
+      homeBanner.innerHTML = '';
+    }
+  }
   document.getElementById('home-partite').textContent=matches.length;
   document.getElementById('home-gol').textContent=players.reduce((a,p)=>a+(p.goals||0),0);
   const top3=[...players].sort((a,b)=>(b.goals||0)-(a.goals||0)).slice(0,3);
