@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0054)file:///C:/Users/GiorgioPuglisi/Downloads/index_4.html -->
+<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a1628">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,10 +10,10 @@
 <meta name="application-name" content="F.I.C.A.">
 <meta name="mobile-web-app-capable" content="yes">
 <!-- PWA -->
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+<link rel="manifest" href="file:///C:/Users/GiorgioPuglisi/Downloads/manifest.json">
+<link rel="apple-touch-icon" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-512.png">
 <title>⚽ F.I.C.A.</title>
 <script>
   if ('serviceWorker' in navigator) {
@@ -24,7 +24,7 @@
     });
   }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   :root {
     --bg:#080f1e; --bg2:#0d1a2e; --card:#111d33; --card2:#152038;
@@ -293,20 +293,16 @@
 <body>
 
 <!-- SPLASH -->
-<div id="splash">
-  <img src="./icon-192.png" alt="F.I.C.A.">
-  <h1>F.I.C.A.</h1>
-  <p>Connessione in corso...</p>
-</div>
+
 
 <div class="app">
   <header>
     <div class="header-logo">
-      <img src="./icon-192.png" alt="logo">
+      <img src="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png" alt="logo">
       <div><h1>F.I.C.A.</h1><span>Giovedì Sera</span></div>
     </div>
-    <div class="sync-badge syncing" id="sync-badge">
-      <div class="sync-dot"></div><span id="sync-label">...</span>
+    <div class="sync-badge online" id="sync-badge">
+      <div class="sync-dot"></div><span id="sync-label">Live</span>
     </div>
   </header>
 
@@ -316,26 +312,129 @@
     <div class="section active" id="sec-home">
       <div class="next-match">
         <div class="label">Prossima Partita</div>
-        <div class="date" id="nextDate">—</div>
+        <div class="date" id="nextDate">4 Giu</div>
         <div class="time">Ore 21:00</div>
         <div class="place">📍 <span>Campo Sintetico Centro Sportivo</span></div>
       </div>
       <div class="quick-stats">
-        <div class="qstat"><div class="val" id="home-confermati">—</div><div class="lbl">✅ Confermati</div></div>
-        <div class="qstat"><div class="val" id="home-partite">—</div><div class="lbl">🏆 Partite</div></div>
-        <div class="qstat"><div class="val" id="home-gol">—</div><div class="lbl">⚽ Gol Tot.</div></div>
+        <div class="qstat"><div class="val" id="home-confermati">10</div><div class="lbl">✅ Confermati</div></div>
+        <div class="qstat"><div class="val" id="home-partite">2</div><div class="lbl">🏆 Partite</div></div>
+        <div class="qstat"><div class="val" id="home-gol">7</div><div class="lbl">⚽ Gol Tot.</div></div>
       </div>
-      <div id="home-banner-dieci"></div>
-      <div class="card" id="card-formazione" style="display:none">
+      <div id="home-banner-dieci"><div class="banner-dieci" style="margin-bottom:14px">
+        <span class="banner-emoji">🎉</span>
+        <div class="banner-title">SIAMO IN 10! SI GIOCA!</div>
+        <div class="banner-sub">Giovedì si scende in campo 💪</div>
+        <div class="banner-names">Massi  ·  Salva  ·  Teo  ·  Vale  ·  Lele  ·  Giorgio  ·  Dany  ·  Ale Brag  ·  Lollo  ·  Max Brag</div>
+      </div></div>
+      <div class="card" id="card-formazione" style="display: block;">
         <div class="card-title">⚽ Formazione Suggerita</div>
-        <div class="formazione-wrap" id="home-formazione"></div>
+        <div class="formazione-wrap" id="home-formazione">
+    <div class="formazione-team team-a">
+      <h3>SQUADRA A</h3>
+      <div class="formazione-player">
+        <span class="fp-emoji">🦁</span>
+        <span>Massi</span>
+        <span class="fp-gk">🧤</span>
+      </div><div class="formazione-player">
+        <span class="fp-emoji">🔥</span>
+        <span>Teo</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">🚀</span>
+        <span>Lele</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">💥</span>
+        <span>Dany</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">😎</span>
+        <span>Lollo</span>
+        
+      </div>
+    </div>
+    <div class="formazione-team team-b">
+      <h3>SQUADRA B</h3>
+      <div class="formazione-player">
+        <span class="fp-emoji">⚡</span>
+        <span>Salva</span>
+        <span class="fp-gk">🧤</span>
+      </div><div class="formazione-player">
+        <span class="fp-emoji">🌟</span>
+        <span>Vale</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">🦊</span>
+        <span>Giorgio</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">🎯</span>
+        <span>Ale Brag</span>
+        
+      </div><div class="formazione-player">
+        <span class="fp-emoji">💪</span>
+        <span>Max Brag</span>
+        
+      </div>
+    </div></div>
         <div style="font-size:10px;color:var(--text2);text-align:center">Divisione automatica basata sui gol</div>
       </div>
-      <div class="card"><div class="card-title">📊 Top Marcatori</div><div id="home-top3" class="scorers-list"></div></div>
-      <div class="card"><div class="card-title">📅 Ultimo Risultato</div><div id="home-lastmatch"></div></div>
+      <div class="card"><div class="card-title">📊 Top Marcatori</div><div id="home-top3" class="scorers-list"><div class="scorer-row" style="margin-bottom:8px">
+          <div class="rank gold">🥇</div>
+          <div style="font-size:22px">🦁</div>
+          <div class="scorer-info">
+            <div class="scorer-name">Massi</div>
+            <div class="scorer-detail">2 presenze</div>
+            <div class="progress-bar-wrap"><div class="progress-bar" style="width:100%"></div></div>
+          </div>
+          <div class="scorer-goals">5</div>
+        </div><div class="scorer-row" style="margin-bottom:8px">
+          <div class="rank silver">🥈</div>
+          <div style="font-size:22px">⚡</div>
+          <div class="scorer-info">
+            <div class="scorer-name">Salva</div>
+            <div class="scorer-detail">2 presenze</div>
+            <div class="progress-bar-wrap"><div class="progress-bar" style="width:40%"></div></div>
+          </div>
+          <div class="scorer-goals">2</div>
+        </div><div class="scorer-row" style="margin-bottom:8px">
+          <div class="rank bronze">🥉</div>
+          <div style="font-size:22px">🔥</div>
+          <div class="scorer-info">
+            <div class="scorer-name">Teo</div>
+            <div class="scorer-detail">0 presenze</div>
+            <div class="progress-bar-wrap"><div class="progress-bar" style="width:0%"></div></div>
+          </div>
+          <div class="scorer-goals">0</div>
+        </div></div></div>
+      <div class="card"><div class="card-title">📅 Ultimo Risultato</div><div id="home-lastmatch">
+      <div class="match-meta"><span>📅 Sab 30 Mag</span></div>
+      <div class="match-score">
+        <div class="team-score">
+          <div class="team-name">Bianchi<span class="winner-tag">WIN</span></div>
+          <div class="score-num" style="color:var(--green)">3</div>
+        </div>
+        <div class="score-sep">-</div>
+        <div class="team-score">
+          <div class="team-name">Rossi</div>
+          <div class="score-num" style="color:var(--text)">1</div>
+        </div>
+      </div>
+      <div class="match-scorers">⚽ <span>Massi 3, Salva 1</span></div></div></div>
       <div class="card">
         <div class="card-title">📈 Andamento Gol</div>
-        <div class="chart-wrap" id="home-chart"><div style="text-align:center;color:var(--text2);padding:10px">Aggiungi partite per vedere il grafico</div></div>
+        <div class="chart-wrap" id="home-chart"><div class="chart-bars">
+    <div class="chart-bar-col">
+        <div class="chart-val">3</div>
+        <div class="chart-bar" style="height:75px" title="Bianchi 2-1 Rossi"></div>
+        <div class="chart-lbl">29 Ma</div>
+      </div><div class="chart-bar-col">
+        <div class="chart-val">4</div>
+        <div class="chart-bar" style="height:100px" title="Bianchi 3-1 Rossi"></div>
+        <div class="chart-lbl">30 Ma</div>
+      </div>
+  </div></div>
       </div>
       <div class="card">
         <div class="card-title">🔔 Notifiche</div>
@@ -346,7 +445,7 @@
 
     <!-- CONVOCAZIONI -->
     <div class="section" id="sec-convoca">
-      <div class="convoca-header"><h2>Convocazioni</h2><button class="pill" onclick="openModal('modal-player')">+ Giocatore</button></div>
+      <div class="convoca-header"><h2>Convocazioni</h2><button class="pill" onclick="openModal(&#39;modal-player&#39;)">+ Giocatore</button></div>
       <div class="status-bar" id="convoca-status"></div>
       <div id="banner-dieci"></div>
       <div class="player-list" id="player-list"><div style="text-align:center;padding:30px;color:var(--text2)">Caricamento...</div></div>
@@ -356,23 +455,23 @@
     <div class="section" id="sec-stats">
       <div class="section-label">Classifica Stagione</div>
       <div class="stat-tabs">
-        <button class="stat-tab active" onclick="switchStatTab('goals',this)">⚽ Gol</button>
-        <button class="stat-tab" onclick="switchStatTab('presenze',this)">📋 Presenze</button>
-        <button class="stat-tab" onclick="switchStatTab('mvp',this)">⭐ MVP</button>
-        <button class="stat-tab" onclick="switchStatTab('vinte',this)">🏆 Vinte</button>
+        <button class="stat-tab active" onclick="switchStatTab(&#39;goals&#39;,this)">⚽ Gol</button>
+        <button class="stat-tab" onclick="switchStatTab(&#39;presenze&#39;,this)">📋 Presenze</button>
+        <button class="stat-tab" onclick="switchStatTab(&#39;mvp&#39;,this)">⭐ MVP</button>
+        <button class="stat-tab" onclick="switchStatTab(&#39;vinte&#39;,this)">🏆 Vinte</button>
       </div>
       <div class="scorers-list" id="stats-list"></div>
     </div>
 
     <!-- PARTITE -->
     <div class="section" id="sec-partite">
-      <div class="convoca-header"><h2>Storico Partite</h2><button class="pill" onclick="openModal('modal-match')">+ Partita</button></div>
+      <div class="convoca-header"><h2>Storico Partite</h2><button class="pill" onclick="openModal(&#39;modal-match&#39;)">+ Partita</button></div>
       <div id="matches-list"></div>
     </div>
 
     <!-- MEDIA -->
     <div class="section" id="sec-media">
-      <div class="convoca-header"><h2>Foto & Video</h2><button class="pill" onclick="openModal('modal-media')">+ Aggiungi</button></div>
+      <div class="convoca-header"><h2>Foto &amp; Video</h2><button class="pill" onclick="openModal(&#39;modal-media&#39;)">+ Aggiungi</button></div>
       <div class="media-grid" id="media-grid"></div>
     </div>
 
@@ -381,8 +480,7 @@
       <div class="convoca-header"><h2>Pagelle</h2></div>
       <div class="form-field" style="margin-bottom:14px">
         <label style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text2);display:block;margin-bottom:8px">Seleziona Partita</label>
-        <select id="pagelle-match-select" onchange="onPagellaMatchChange()"
-          style="width:100%;background:var(--card);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;outline:none">
+        <select id="pagelle-match-select" onchange="onPagellaMatchChange()" style="width:100%;background:var(--card);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:var(--text);font-family:&#39;Barlow&#39;,sans-serif;font-size:15px;outline:none">
           <option value="">-- Scegli una partita --</option>
         </select>
       </div>
@@ -392,17 +490,17 @@
   </div><!-- /content -->
 
   <nav>
-    <button class="nav-btn active" onclick="showSection('home',this)"><span class="icon">🏠</span>Home</button>
-    <button class="nav-btn" onclick="showSection('convoca',this)"><span class="icon">📋</span>Lista</button>
-    <button class="nav-btn" onclick="showSection('stats',this)"><span class="icon">📊</span>Stats</button>
-    <button class="nav-btn" onclick="showSection('partite',this)"><span class="icon">🏆</span>Partite</button>
-    <button class="nav-btn" onclick="showSection('media',this)"><span class="icon">📸</span>Media</button>
-    <button class="nav-btn" onclick="showSection('pagelle',this)"><span class="icon">⭐</span>Pagelle</button>
+    <button class="nav-btn active" onclick="showSection(&#39;home&#39;,this)"><span class="icon">🏠</span>Home</button>
+    <button class="nav-btn" onclick="showSection(&#39;convoca&#39;,this)"><span class="icon">📋</span>Lista</button>
+    <button class="nav-btn" onclick="showSection(&#39;stats&#39;,this)"><span class="icon">📊</span>Stats</button>
+    <button class="nav-btn" onclick="showSection(&#39;partite&#39;,this)"><span class="icon">🏆</span>Partite</button>
+    <button class="nav-btn" onclick="showSection(&#39;media&#39;,this)"><span class="icon">📸</span>Media</button>
+    <button class="nav-btn" onclick="showSection(&#39;pagelle&#39;,this)"><span class="icon">⭐</span>Pagelle</button>
   </nav>
 </div>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="modal-player" onclick="closeModalOutside(event,'modal-player')">
+<div class="modal-overlay" id="modal-player" onclick="closeModalOutside(event,&#39;modal-player&#39;)">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Giocatore</h3>
     <div class="form-field"><label>Nome</label><input type="text" id="f-name" placeholder="es. Marco"></div>
@@ -415,13 +513,13 @@
       </select>
     </div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-player')">Annulla</button>
-      <button class="btn-full btn-green"   style="flex:2" onclick="addPlayer()">Aggiungi</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-player&#39;)">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addPlayer()">Aggiungi</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-match" onclick="closeModalOutside(event,'modal-match')">
+<div class="modal-overlay" id="modal-match" onclick="closeModalOutside(event,&#39;modal-match&#39;)">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Partita</h3>
     <div class="form-field"><label>Data</label><input type="date" id="m-date"></div>
@@ -439,13 +537,13 @@
       <div class="scorer-players" id="scorer-players-list"></div>
     </div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-match')">Annulla</button>
-      <button class="btn-full btn-green"   style="flex:2" onclick="addMatch()">Salva</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-match&#39;)">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addMatch()">Salva</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-media" onclick="closeModalOutside(event,'modal-media')">
+<div class="modal-overlay" id="modal-media" onclick="closeModalOutside(event,&#39;modal-media&#39;)">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Media</h3>
     <div class="form-field"><label>Tipo</label>
@@ -458,8 +556,8 @@
     <div class="form-field"><label>Descrizione</label><input type="text" id="med-desc" placeholder="es. Gol di Massi 🔥"></div>
     <div class="form-field"><label>Data</label><input type="date" id="med-date"></div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-media')">Annulla</button>
-      <button class="btn-full btn-green"   style="flex:2" onclick="addMedia()">Aggiungi</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-media&#39;)">Annulla</button>
+      <button class="btn-full btn-green" style="flex:2" onclick="addMedia()">Aggiungi</button>
     </div>
   </div>
 </div>
@@ -694,7 +792,7 @@ window.cycleStatus=async function(id,current,confCount){
   } else if(current==='waitlist'){
     next = 'declined';
   }
-  const labels={confirmed:'✅ Confermato!',declined:'❌ Non disponibile',pending:'⏳ In attesa',waitlist:'🟠 In lista d'attesa'};
+  const labels={confirmed:'✅ Confermato!',declined:'❌ Non disponibile',pending:'⏳ In attesa',waitlist:'🟠 In lista attesa'};
   try{
     setSyncStatus('syncing');
     await updateDoc(doc(db,"players",id),{status:next});
@@ -1379,5 +1477,6 @@ async function init(){
 }
 init();
 </script>
-</body>
-</html>
+
+
+</body></html>
