@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/GiorgioPuglisi/Downloads/index_7.html -->
-<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a1628">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,10 +11,10 @@
 <meta name="application-name" content="F.I.C.A.">
 <meta name="mobile-web-app-capable" content="yes">
 <!-- PWA -->
-<link rel="manifest" href="file:///C:/Users/GiorgioPuglisi/Downloads/manifest.json">
-<link rel="apple-touch-icon" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="file:///C:/Users/GiorgioPuglisi/Downloads/icon-512.png">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 <title>⚽ F.I.C.A.</title>
 <script>
   if ('serviceWorker' in navigator) {
@@ -24,286 +25,280 @@
     });
   }
 </script>
-<link href="./index_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#080f1e; --bg2:#0d1a2e; --card:#111d33; --card2:#152038;
-    --green:#00e676; --green2:#00c853; --yellow:#ffd600; --red:#ff1744;
-    --text:#e8f0fe; --text2:#8ba3c7; --border:rgba(0,230,118,0.18);
-    --shadow:0 4px 32px rgba(0,0,0,0.5);
+    --bg:#07090f; --bg2:#0d1020; --bg3:#131828;
+    --card:#0f1322; --card2:#161c30;
+    --gold:#ffd700; --gold2:#c8a800; --gold3:rgba(255,215,0,0.1);
+    --white:#ffffff; --gray1:#8899bb; --gray2:#445577; --gray3:#1e2640; --gray4:#111827;
+    --red:#ff1744; --green:#00e676; --orange:#ff8c00;
+    --text:#e8f0fe; --text2:#8899bb; --text3:#2a3550;
+    --border:rgba(255,215,0,0.15); --border2:rgba(255,255,255,0.06);
+    --shadow:0 4px 32px rgba(0,0,0,0.8);
   }
   * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
-  html,body { height:100%; background:var(--bg); color:var(--text); font-family:'Barlow',sans-serif; overflow-x:hidden; }
+  html,body { height:100%; background:var(--bg); color:var(--text); font-family:'Georgia',serif; overflow-x:hidden; }
 
   /* SPLASH */
   #splash { position:fixed; inset:0; z-index:999; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
-  #splash img { width:110px; height:110px; border-radius:50%; box-shadow:0 4px 30px rgba(0,0,0,0.5); animation:bounceBall 1s ease-in-out infinite; }
-  #splash h1 { font-family:'Bebas Neue',sans-serif; font-size:42px; color:var(--green); letter-spacing:4px; margin-top:14px; }
-  #splash p { color:var(--text2); font-size:11px; margin-top:4px; letter-spacing:3px; text-transform:uppercase; }
-  @keyframes bounceBall{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  #splash img { width:100px; height:100px; border-radius:50%; border:3px solid var(--gold); box-shadow:0 0 30px rgba(255,215,0,0.3); animation:bounceBall 1s ease-in-out infinite; }
+  #splash h1 { font-family:'Georgia',serif; font-size:40px; font-weight:700; color:var(--gold); letter-spacing:6px; margin-top:14px; line-height:1; }
+  #splash .badge { background:transparent; border:1px solid var(--gold); color:var(--gold); font-size:9px; font-weight:700; padding:3px 14px; border-radius:2px; letter-spacing:4px; text-transform:uppercase; margin-top:6px; font-family:'Arial',sans-serif; }
+  #splash p { color:var(--gray1); font-size:10px; margin-top:10px; letter-spacing:3px; text-transform:uppercase; font-family:'Arial',sans-serif; }
+  @keyframes bounceBall{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
   /* LAYOUT */
   .app { display:flex; flex-direction:column; height:100vh; }
-  header {
-    background:linear-gradient(135deg,var(--bg2) 0%,#0d1f3a 100%);
-    border-bottom:2px solid var(--border); padding:10px 16px 10px;
-    display:flex; align-items:center; justify-content:space-between;
-    position:sticky; top:0; z-index:100; box-shadow:0 2px 20px rgba(0,0,0,0.4);
-  }
-  .header-logo { display:flex; align-items:center; gap:10px; }
-  .header-logo img { width:40px; height:40px; border-radius:50%; border:2px solid var(--green); }
-  .header-logo h1 { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--green); letter-spacing:2px; line-height:1; }
-  .header-logo span { font-size:10px; color:var(--text2); letter-spacing:3px; text-transform:uppercase; display:block; }
-  .sync-badge { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px; display:flex; align-items:center; gap:5px; transition:all 0.3s; }
-  .sync-badge.online  { background:var(--green); color:var(--bg); }
-  .sync-badge.offline { background:rgba(255,23,68,0.2); color:var(--red); border:1px solid var(--red); }
-  .sync-badge.syncing { background:rgba(255,214,0,0.2); color:var(--yellow); border:1px solid var(--yellow); }
-  .sync-dot { width:7px; height:7px; border-radius:50%; background:currentColor; }
 
-  nav { background:var(--bg2); border-top:2px solid var(--border); display:flex; justify-content:space-around; align-items:center; padding:8px 0 12px; position:sticky; bottom:0; z-index:100; box-shadow:0 -4px 20px rgba(0,0,0,0.4); }
-  .nav-btn { display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; color:var(--text2); font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; cursor:pointer; padding:6px 12px; border-radius:12px; transition:all 0.2s; }
-  .nav-btn .icon { font-size:22px; }
-  .nav-btn.active { color:var(--green); background:rgba(0,230,118,0.1); }
+  /* HEADER */
+  header { background:linear-gradient(135deg,var(--bg2),#0a0e1f); border-bottom:1px solid var(--border); padding:10px 16px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; box-shadow:0 2px 20px rgba(0,0,0,0.5); }
+  .header-logo { display:flex; align-items:center; gap:10px; }
+  .header-logo img { width:36px; height:36px; border-radius:50%; border:2px solid var(--gold); }
+  .header-logo .ea-label { font-size:8px; color:var(--gray2); letter-spacing:3px; font-weight:400; text-transform:uppercase; display:block; font-family:'Arial',sans-serif; }
+  .header-logo h1 { font-family:'Georgia',serif; font-size:22px; font-weight:700; color:var(--gold); letter-spacing:3px; line-height:1; }
+  .sync-badge { font-size:10px; font-weight:700; padding:4px 10px; border-radius:2px; text-transform:uppercase; letter-spacing:1px; display:flex; align-items:center; gap:5px; transition:all 0.3s; font-family:'Arial',sans-serif; }
+  .sync-badge.online  { background:var(--gold3); border:1px solid var(--gold); color:var(--gold); }
+  .sync-badge.offline { background:rgba(255,23,68,0.1); color:var(--red); border:1px solid var(--red); }
+  .sync-badge.syncing { background:rgba(255,215,0,0.08); color:var(--gold2); border:1px solid var(--gold2); }
+  .sync-dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+  /* NAV */
+  nav { background:var(--bg2); border-top:1px solid var(--border); display:flex; justify-content:space-around; align-items:center; padding:8px 0 12px; position:sticky; bottom:0; z-index:100; box-shadow:0 -4px 20px rgba(0,0,0,0.5); }
+  .nav-btn { display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none; color:var(--gray2); font-size:7px; font-weight:700; text-transform:uppercase; letter-spacing:1px; cursor:pointer; padding:5px 10px; border-radius:4px; transition:all 0.2s; font-family:'Arial',sans-serif; }
+  .nav-btn .icon { font-size:20px; }
+  .nav-btn.active { color:var(--gold); background:var(--gold3); }
   .nav-btn:active { transform:scale(0.92); }
 
-  .content { flex:1; overflow-y:auto; padding:16px; padding-bottom:8px; }
+  .content { flex:1; overflow-y:auto; }
   .section { display:none; }
-  .section.active { display:block; animation:fadeUp 0.3s ease; }
-  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .section.active { display:block; animation:fadeUp 0.25s ease; }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-  .card { background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:16px; margin-bottom:14px; box-shadow:var(--shadow); }
-  .card-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--green); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  /* CAMPO HERO */
+  .campo-hero { position:relative; height:150px; overflow:hidden; }
+  .campo-hero svg { width:100%; height:150px; display:block; }
 
-  .next-match { background:linear-gradient(135deg,#0d2a1a 0%,#0d1f2a 100%); border:1.5px solid var(--green); border-radius:20px; padding:20px; margin-bottom:16px; text-align:center; position:relative; overflow:hidden; }
-  .next-match::before { content:'⚽'; position:absolute; font-size:120px; opacity:0.04; right:-20px; top:50%; transform:translateY(-50%); }
-  .next-match .label { font-size:11px; text-transform:uppercase; letter-spacing:3px; color:var(--text2); margin-bottom:6px; }
-  .next-match .date { font-family:'Bebas Neue',sans-serif; font-size:42px; color:var(--green); line-height:1; }
-  .next-match .time { font-family:'Barlow Condensed',sans-serif; font-size:20px; color:var(--text2); letter-spacing:1px; }
-  .next-match .place { font-size:13px; color:var(--text2); margin-top:8px; }
-  .next-match .place span { color:var(--text); font-weight:600; }
+  /* STATS STRIP */
+  .stats-strip { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); }
+  .stat-cell { background:var(--bg); padding:12px 6px; text-align:center; }
+  .stat-val { font-family:'Georgia',serif; font-size:28px; font-weight:700; color:var(--gold); line-height:1; }
+  .stat-lbl { font-size:7px; color:var(--gray2); text-transform:uppercase; letter-spacing:1px; margin-top:3px; font-family:'Arial',sans-serif; }
 
-  .quick-stats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
-  .qstat { background:var(--card); border-radius:14px; padding:14px 10px; text-align:center; border:1px solid rgba(255,255,255,0.05); }
-  .qstat .val { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--green); line-height:1; }
-  .qstat .lbl { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--text2); margin-top:2px; }
+  /* SECTION LABEL */
+  .sec-label { font-size:8px; color:var(--gray2); letter-spacing:4px; text-transform:uppercase; font-weight:700; padding:12px 16px 6px; border-top:1px solid var(--gray3); font-family:'Arial',sans-serif; display:flex; align-items:center; gap:8px; }
+  .sec-label::before { content:''; display:inline-block; width:20px; height:1px; background:var(--gold); }
 
-  .convoca-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-  .convoca-header h2 { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:1px; }
-  .pill { background:var(--green); color:var(--bg); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; padding:6px 14px; border-radius:20px; border:none; cursor:pointer; letter-spacing:1px; transition:all 0.2s; }
-  .pill:active { transform:scale(0.95); }
+  /* CARDS */
+  .ea-card { background:var(--card); border:1px solid var(--gray3); margin:0 12px 12px; border-radius:4px; overflow:hidden; }
+  .ea-card-title { font-size:8px; color:var(--gray2); letter-spacing:4px; text-transform:uppercase; font-weight:700; padding:10px 14px 8px; border-bottom:1px solid var(--gray3); display:flex; align-items:center; justify-content:space-between; font-family:'Arial',sans-serif; }
+  .ea-card-title span { color:var(--gold); }
 
-  .status-bar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
-  .status-chip { background:var(--card); border-radius:20px; padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px; display:flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,0.06); }
-  .status-chip .dot { width:8px; height:8px; border-radius:50%; }
-  .dot-green{background:var(--green)} .dot-red{background:var(--red)} .dot-yellow{background:var(--yellow)}
+  /* SCORER ROWS */
+  .scorer-row-ea { display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--gray3); }
+  .scorer-row-ea:last-child { border-bottom:none; }
+  .scorer-rank { font-family:'Georgia',serif; font-size:22px; font-weight:700; color:var(--gray3); min-width:22px; text-align:center; }
+  .scorer-rank.gold   { color:#ffd700; }
+  .scorer-rank.silver { color:#b0bec5; }
+  .scorer-rank.bronze { color:#ff7043; }
+  .scorer-emoji { font-size:22px; }
+  .scorer-info-ea { flex:1; }
+  .scorer-name-ea { font-size:14px; font-weight:700; color:var(--white); font-family:'Georgia',serif; letter-spacing:0.5px; }
+  .scorer-sub-ea  { font-size:9px; color:var(--gray2); margin-top:2px; font-family:'Arial',sans-serif; letter-spacing:1px; text-transform:uppercase; }
+  .scorer-goals-ea { font-family:'Georgia',serif; font-size:34px; font-weight:700; color:var(--gold); line-height:1; }
+  .bar-wrap { background:var(--gray3); border-radius:1px; height:2px; margin-top:6px; }
+  .bar-fill { height:2px; border-radius:1px; background:linear-gradient(90deg,var(--gold),var(--gold2)); }
 
-  .player-list { display:flex; flex-direction:column; gap:10px; }
-  .player-row { background:var(--card); border-radius:14px; padding:12px 14px; display:flex; align-items:center; gap:12px; border:1px solid rgba(255,255,255,0.05); transition:all 0.2s; cursor:pointer; }
-  .player-row:active { transform:scale(0.98); }
-  .player-row.confirmed  { border-color:rgba(0,230,118,0.3); background:rgba(0,230,118,0.05); }
-  .player-row.declined   { border-color:rgba(255,23,68,0.2); opacity:0.6; }
-  .player-row.waitlist   { border-color:rgba(255,140,0,0.4); background:rgba(255,140,0,0.05); }
-  .player-row.confirmed .player-avatar  { border-color:var(--green); }
-  .player-row.waitlist  .player-avatar  { border-color:#ff8c00; }
-  .waitlist-badge { background:rgba(255,140,0,0.15); border:1px solid #ff8c00; color:#ff8c00; font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 7px; border-radius:10px; margin-left:6px; }
-  .dot-orange { background:#ff8c00; }
-  .waitlist-pos { font-family:'Bebas Neue',sans-serif; font-size:20px; color:#ff8c00; min-width:22px; text-align:center; }
-  .player-info { flex:1; min-width:0; }
-  .player-name { font-weight:700; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .player-sub  { font-size:11px; color:var(--text2); text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
-  .player-status { font-size:20px; flex-shrink:0; }
+  /* LAST MATCH */
+  .match-result { padding:14px; }
+  .match-meta-ea { font-size:8px; color:var(--gray2); letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; display:flex; justify-content:space-between; font-family:'Arial',sans-serif; }
+  .match-score-ea { display:flex; align-items:center; justify-content:center; gap:14px; }
+  .team-ea { text-align:center; flex:1; }
+  .team-name-ea { font-size:10px; font-weight:700; color:var(--gray2); text-transform:uppercase; letter-spacing:2px; margin-bottom:5px; font-family:'Arial',sans-serif; }
+  .score-ea { font-family:'Georgia',serif; font-size:54px; font-weight:700; line-height:1; }
+  .score-vs { font-family:'Arial',sans-serif; font-size:14px; font-weight:700; color:var(--gray2); padding-top:10px; letter-spacing:2px; }
+  .win-tag { background:var(--gold); color:var(--bg); font-size:8px; font-weight:700; padding:2px 8px; border-radius:2px; letter-spacing:1px; margin-left:5px; font-family:'Arial',sans-serif; text-transform:uppercase; }
+  .scorers-ea { font-size:11px; color:var(--gray1); text-align:center; margin-top:10px; padding-top:10px; border-top:1px solid var(--gray3); font-family:'Arial',sans-serif; }
+  .scorers-ea b { color:var(--text); font-weight:700; }
 
-  .stat-tabs { display:flex; gap:8px; margin-bottom:16px; overflow-x:auto; padding-bottom:4px; }
-  .stat-tab { background:var(--card); border-radius:20px; padding:8px 16px; white-space:nowrap; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text2); cursor:pointer; transition:all 0.2s; border:none; }
-  .stat-tab.active { background:var(--green); color:var(--bg); }
+  /* PLAYER LIST */
+  .player-row-ea { display:flex; align-items:center; gap:10px; padding:10px 16px; border-bottom:1px solid var(--gray3); cursor:pointer; transition:all 0.15s; }
+  .player-row-ea:active { background:var(--card2); }
+  .player-row-ea.confirmed { background:rgba(255,215,0,0.04); border-left:3px solid var(--gold); }
+  .player-row-ea.declined  { opacity:0.4; }
+  .player-row-ea.waitlist  { border-left:3px solid var(--orange); background:rgba(255,140,0,0.04); }
+  .player-num  { font-family:'Georgia',serif; font-size:12px; font-weight:700; color:var(--gray3); min-width:18px; text-align:center; }
+  .player-emo  { font-size:20px; }
+  .player-info-ea { flex:1; min-width:0; }
+  .player-name-ea { font-size:14px; font-weight:700; color:var(--white); font-family:'Georgia',serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .player-name-ea.muted { color:var(--gray2); }
+  .player-sub-ea  { font-size:9px; color:var(--gray2); margin-top:2px; font-family:'Arial',sans-serif; letter-spacing:1px; text-transform:uppercase; }
+  .player-rating  { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--bg); font-family:'Georgia',serif; font-size:13px; font-weight:700; padding:3px 8px; border-radius:2px; min-width:32px; text-align:center; }
+  .player-status-ea { font-size:16px; margin-left:4px; }
+  .gk-badge-ea { background:rgba(255,215,0,0.15); border:1px solid var(--gold); color:var(--gold); font-size:8px; font-weight:700; padding:1px 5px; border-radius:2px; margin-left:5px; letter-spacing:1px; font-family:'Arial',sans-serif; text-transform:uppercase; }
+  .wait-badge-ea { background:rgba(255,140,0,0.12); border:1px solid var(--orange); color:var(--orange); font-size:8px; font-weight:700; padding:1px 5px; border-radius:2px; margin-left:5px; font-family:'Arial',sans-serif; }
+  .gk-btn-ea { background:transparent; border:1px solid var(--gray3); color:var(--gray2); border-radius:3px; padding:3px 6px; cursor:pointer; font-size:13px; transition:all 0.2s; flex-shrink:0; }
+  .gk-btn-ea.is-gk { border-color:var(--gold); color:var(--gold); background:rgba(255,215,0,0.1); }
+  .gk-btn-ea:disabled { opacity:0.15; cursor:not-allowed; }
 
-  .scorers-list { display:flex; flex-direction:column; gap:8px; }
-  .scorer-row { background:var(--card); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:12px; border:1px solid rgba(255,255,255,0.05); }
-  .rank { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--text2); width:28px; text-align:center; flex-shrink:0; }
-  .rank.gold{color:#ffd600} .rank.silver{color:#b0bec5} .rank.bronze{color:#ff7043}
-  .scorer-info { flex:1; }
-  .scorer-name   { font-weight:700; font-size:15px; }
-  .scorer-detail { font-size:11px; color:var(--text2); text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
-  .scorer-goals  { font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--green); line-height:1; }
-  .progress-bar-wrap { background:rgba(255,255,255,0.08); border-radius:4px; height:4px; margin-top:8px; }
-  .progress-bar  { height:4px; border-radius:4px; background:var(--green); }
+  /* STATUS BAR */
+  .status-bar-ea { display:flex; gap:6px; padding:10px 14px 6px; flex-wrap:wrap; }
+  .status-chip-ea { background:var(--card); border:1px solid var(--gray3); border-radius:2px; padding:4px 10px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1px; display:flex; align-items:center; gap:5px; font-family:'Arial',sans-serif; color:var(--gray1); }
+  .sdot { width:6px; height:6px; border-radius:50%; }
+  .sdot-g{background:var(--green)} .sdot-r{background:var(--red)} .sdot-y{background:var(--gold)} .sdot-o{background:var(--orange)}
 
-  .match-card { background:var(--card); border-radius:16px; padding:16px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.05); }
-  .match-meta  { font-size:11px; color:var(--text2); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; display:flex; justify-content:space-between; }
-  .match-score { display:flex; align-items:center; justify-content:center; gap:16px; }
-  .team-score  { text-align:center; flex:1; }
-  .team-name   { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:1px; color:var(--text2); margin-bottom:6px; }
-  .score-num   { font-family:'Bebas Neue',sans-serif; font-size:54px; line-height:1; }
-  .score-sep   { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--text2); padding-top:8px; }
-  .match-scorers { font-size:12px; color:var(--text2); text-align:center; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06); }
-  .match-scorers span { color:var(--text); font-weight:600; }
-  .winner-tag { display:inline-block; background:var(--green); color:var(--bg); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; padding:2px 8px; border-radius:10px; letter-spacing:1px; text-transform:uppercase; margin-left:6px; }
+  /* STATS TAB */
+  .stat-tabs-ea { display:flex; gap:4px; padding:10px 14px 6px; overflow-x:auto; }
+  .stat-tab-ea { background:var(--card); border:1px solid var(--gray3); border-radius:2px; padding:6px 14px; white-space:nowrap; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--gray2); cursor:pointer; transition:all 0.2s; font-family:'Arial',sans-serif; }
+  .stat-tab-ea.active { background:var(--gold); color:var(--bg); border-color:var(--gold); font-family:'Georgia',serif; }
 
-  .media-grid  { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .media-thumb { background:var(--card2); border-radius:12px; aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:36px; cursor:pointer; border:1px solid rgba(255,255,255,0.05); transition:all 0.2s; position:relative; overflow:hidden; }
+  /* MATCHES */
+  .match-card-ea { background:var(--card); border:1px solid var(--gray3); margin:0 12px 12px; border-radius:4px; overflow:hidden; }
+  .match-header-ea { background:var(--bg2); padding:8px 14px; font-size:8px; color:var(--gray2); letter-spacing:3px; text-transform:uppercase; font-weight:700; display:flex; justify-content:space-between; font-family:'Arial',sans-serif; }
+  .match-body-ea { padding:14px; }
+  .match-delete-btn { background:rgba(255,23,68,0.06); border:1px solid rgba(255,23,68,0.2); color:var(--red); border-radius:2px; padding:5px; font-size:10px; font-weight:700; letter-spacing:1px; cursor:pointer; margin-top:10px; width:100%; text-transform:uppercase; transition:all 0.2s; font-family:'Arial',sans-serif; }
+  .match-delete-btn:active { background:rgba(255,23,68,0.15); }
+
+  /* MEDIA */
+  .media-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:12px; }
+  .media-thumb { background:var(--card); border-radius:4px; aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:32px; cursor:pointer; border:1px solid var(--gray3); transition:all 0.2s; position:relative; overflow:hidden; }
   .media-thumb:active { transform:scale(0.97); }
-  .media-thumb .media-label { font-size:11px; color:var(--text2); margin-top:6px; text-transform:uppercase; letter-spacing:1px; padding:0 6px; text-align:center; }
-  .media-thumb.add-new { border:2px dashed rgba(0,230,118,0.3); background:transparent; color:var(--green); }
-  .media-date  { position:absolute; bottom:6px; right:8px; font-size:10px; color:var(--text2); }
+  .media-label { font-size:9px; color:var(--gray2); margin-top:5px; text-transform:uppercase; letter-spacing:1px; padding:0 6px; text-align:center; font-weight:700; font-family:'Arial',sans-serif; }
+  .media-thumb.add-new { border:1px dashed rgba(255,215,0,0.3); background:transparent; color:var(--gold); }
+  .media-date { position:absolute; bottom:5px; right:7px; font-size:9px; color:var(--gray2); font-weight:700; font-family:'Arial',sans-serif; }
 
-  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:500; display:flex; align-items:flex-end; opacity:0; pointer-events:none; transition:opacity 0.3s; }
-  .modal-overlay.open { opacity:1; pointer-events:all; }
-  .modal { background:var(--card); border-radius:24px 24px 0 0; width:100%; padding:24px 20px 36px; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); max-height:90vh; overflow-y:auto; }
-  .modal-overlay.open .modal { transform:translateY(0); }
-  .modal-handle { width:40px; height:4px; background:rgba(255,255,255,0.15); border-radius:2px; margin:0 auto 20px; }
-  .modal h3 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:1px; margin-bottom:20px; }
-  .form-field { margin-bottom:16px; }
-  .form-field label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--text2); margin-bottom:8px; }
-  .form-field input,.form-field select { width:100%; background:var(--bg2); border:1.5px solid rgba(255,255,255,0.1); border-radius:12px; padding:12px 14px; color:var(--text); font-family:'Barlow',sans-serif; font-size:15px; outline:none; transition:border-color 0.2s; }
-  .form-field input:focus,.form-field select:focus { border-color:var(--green); }
-  .form-field select option { background:var(--card); }
-  .form-actions { display:flex; gap:10px; margin-top:8px; }
-  .btn-full { width:100%; padding:14px; border-radius:14px; border:none; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; letter-spacing:1px; text-transform:uppercase; transition:all 0.2s; }
-  .btn-green  { background:var(--green); color:var(--bg); }
-  .btn-green:active { background:var(--green2); transform:scale(0.98); }
-  .btn-outline { background:transparent; border:1.5px solid rgba(255,255,255,0.15); color:var(--text2); }
-
-  .toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--green); color:var(--bg); border-radius:40px; padding:10px 20px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:1px; z-index:600; opacity:0; transition:all 0.3s; pointer-events:none; white-space:nowrap; }
-  .toast.show  { opacity:1; transform:translateX(-50%) translateY(0); }
-  .toast.error { background:var(--red); color:#fff; }
-  .section-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:3px; color:var(--text2); margin-bottom:12px; }
-  ::-webkit-scrollbar{width:0;height:0}
   /* PAGELLE */
-  .pagella-card { background:var(--card); border-radius:16px; padding:14px 16px; margin-bottom:10px; border:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; gap:12px; }
-  .pagella-avatar { width:44px; height:44px; border-radius:50%; background:var(--card2); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .pagella-card { background:var(--card); border:1px solid var(--gray3); margin:0 12px 8px; border-radius:4px; overflow:hidden; display:flex; flex-direction:column; align-items:stretch; }
+  .pagella-top { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .pagella-avatar { width:42px; height:42px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; border:2px solid var(--gold); }
   .pagella-info { flex:1; }
-  .pagella-name { font-weight:700; font-size:15px; }
-  .pagella-sub  { font-size:11px; color:var(--text2); margin-top:2px; }
+  .pagella-name { font-size:14px; font-weight:700; color:var(--white); font-family:'Georgia',serif; }
+  .pagella-sub  { font-size:9px; color:var(--gray2); margin-top:2px; font-family:'Arial',sans-serif; letter-spacing:1px; text-transform:uppercase; }
   .voto-wrap { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-  .voto-btn { background:var(--card2); border:1px solid rgba(255,255,255,0.1); color:var(--text); width:30px; height:30px; border-radius:8px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
+  .voto-btn { background:var(--bg3); border:1px solid var(--gray3); color:var(--text); width:28px; height:28px; border-radius:3px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; font-family:'Georgia',serif; }
   .voto-btn:active { transform:scale(0.88); }
-  .voto-num { font-family:'Bebas Neue',sans-serif; font-size:28px; min-width:36px; text-align:center; }
-  .voto-num.alto { color:var(--green); }
-  .voto-num.medio { color:var(--yellow); }
+  .voto-num { font-family:'Georgia',serif; font-size:32px; font-weight:700; min-width:36px; text-align:center; line-height:1; }
+  .voto-num.alto { color:var(--gold); }
+  .voto-num.medio { color:#ffa500; }
   .voto-num.basso { color:var(--red); }
-  /* SCORER BUTTONS */
-  .scorer-players { display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto; margin-bottom:8px; }
-  .scorer-player-row { display:flex; align-items:center; gap:10px; background:var(--bg2); border-radius:12px; padding:8px 12px; }
-  .scorer-player-name { flex:1; font-weight:600; font-size:14px; }
-  .scorer-count { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--green); min-width:28px; text-align:center; }
-  .scorer-inc { background:var(--green); color:var(--bg); border:none; width:32px; height:32px; border-radius:8px; font-size:18px; cursor:pointer; font-weight:700; }
-  .scorer-dec { background:var(--card2); color:var(--text2); border:1px solid rgba(255,255,255,0.1); width:32px; height:32px; border-radius:8px; font-size:18px; cursor:pointer; }
-  .scorer-inc:active,.scorer-dec:active { transform:scale(0.9); }
-  /* DELETE MATCH */
-  .match-delete-btn { background:rgba(255,23,68,0.12); border:1px solid rgba(255,23,68,0.3); color:var(--red); border-radius:8px; padding:5px 10px; font-size:11px; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px; cursor:pointer; margin-top:8px; width:100%; transition:all 0.2s; }
-  .match-delete-btn:active { background:rgba(255,23,68,0.3); }
-
-  /* COMMENTO PAGELLA */
-  .pagella-card { flex-direction:column; align-items:stretch; }
-  .pagella-top { display:flex; align-items:center; gap:12px; }
-  .pagella-comment-wrap { margin-top:10px; }
-  .pagella-comment-input { width:100%; background:var(--bg2); border:1.5px solid rgba(255,255,255,0.08); border-radius:10px; padding:9px 12px; color:var(--text); font-family:'Barlow',sans-serif; font-size:13px; outline:none; resize:none; transition:border-color 0.2s; }
-  .pagella-comment-input:focus { border-color:var(--green); }
-  .pagella-comment-input::placeholder { color:var(--text2); }
-  .pagella-comment-saved { font-size:11px; color:var(--green); margin-top:4px; opacity:0; transition:opacity 0.3s; }
+  .pagella-comment-wrap { border-top:1px solid var(--gray3); padding:8px 14px; }
+  .pagella-comment-input { width:100%; background:var(--bg); border:1px solid var(--gray3); border-radius:3px; padding:7px 10px; color:var(--text); font-family:'Arial',sans-serif; font-size:12px; outline:none; resize:none; transition:border-color 0.2s; }
+  .pagella-comment-input:focus { border-color:var(--gold); }
+  .pagella-comment-input::placeholder { color:var(--gray2); }
+  .pagella-comment-saved { font-size:9px; color:var(--gold); margin-top:4px; opacity:0; transition:opacity 0.3s; font-weight:700; letter-spacing:2px; text-transform:uppercase; font-family:'Arial',sans-serif; }
   .pagella-comment-saved.show { opacity:1; }
-  .pagelle-match-header { background:linear-gradient(135deg,#0d2a1a,#0d1f2a); border:1px solid var(--border); border-radius:14px; padding:12px 16px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; }
-  .pagelle-match-header .pmh-score { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--green); }
-  .pagelle-match-header .pmh-date  { font-size:11px; color:var(--text2); text-transform:uppercase; letter-spacing:1px; }
-
-  /* BANNER 10 GIOCATORI */
-  .banner-dieci {
-    background: linear-gradient(135deg, #1a2a0a 0%, #0d2a1a 100%);
-    border: 2px solid var(--green); border-radius: 20px;
-    padding: 18px 16px; margin-bottom: 16px;
-    text-align: center; position: relative; overflow: hidden;
-    animation: pulseBorder 1.5s ease-in-out infinite;
-  }
-  @keyframes pulseBorder {
-    0%,100%{ box-shadow: 0 0 0 0 rgba(0,230,118,0.4); }
-    50%{ box-shadow: 0 0 0 10px rgba(0,230,118,0); }
-  }
-  .banner-dieci .banner-emoji { font-size:44px; display:block; animation:bounceBig 0.7s ease-in-out infinite alternate; }
-  @keyframes bounceBig{ from{transform:translateY(0) rotate(-5deg)} to{transform:translateY(-10px) rotate(5deg)} }
-  .banner-dieci .banner-title { font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--green); letter-spacing:3px; margin-top:8px; }
-  .banner-dieci .banner-sub { font-size:13px; color:var(--text2); margin-top:4px; }
-  .banner-dieci .banner-names { font-size:12px; color:var(--text); margin-top:8px; font-weight:600; }
-
-  /* PORTIERE */
-  .goalkeeper-badge { background:rgba(255,214,0,0.15); border:1px solid var(--yellow); color:var(--yellow); font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 7px; border-radius:10px; margin-left:6px; }
-  .goalkeeper-btn { background:transparent; border:1.5px solid rgba(255,214,0,0.3); border-radius:10px; padding:3px 8px; cursor:pointer; font-size:16px; flex-shrink:0; transition:all 0.2s; margin-left:4px; }
-  .goalkeeper-btn:active { transform:scale(0.9); }
-  .goalkeeper-btn.is-gk { background:rgba(255,214,0,0.15); border-color:var(--yellow); }
-  .goalkeeper-btn:disabled { opacity:0.2; cursor:not-allowed; }
-
-  /* OVERLAY BANNER 10 GIOCATORI */
-  .overlay-banner {
-    position:fixed; inset:0; z-index:800;
-    background:rgba(0,0,0,0.75); display:flex; align-items:center; justify-content:center;
-    animation:fadeInOverlay 0.4s ease;
-  }
-  @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
-  .overlay-banner-box {
-    background:linear-gradient(135deg,#0d2a1a 0%,#0a1f30 100%);
-    border:2px solid var(--green); border-radius:24px;
-    padding:32px 24px 28px; margin:20px;
-    text-align:center; position:relative;
-    box-shadow:0 0 40px rgba(0,230,118,0.3);
-    animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
-    max-width:360px; width:100%;
-  }
-  @keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
-  .overlay-close {
-    position:absolute; top:12px; right:14px;
-    background:rgba(255,255,255,0.1); border:none; color:var(--text2);
-    font-size:18px; width:30px; height:30px; border-radius:50%;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:all 0.2s;
-  }
-  .overlay-close:hover { background:rgba(255,255,255,0.2); color:var(--text); }
-  .overlay-banner-box .ov-emoji { font-size:56px; display:block; animation:bounceBig 0.7s ease-in-out infinite alternate; margin-bottom:12px; }
-  .overlay-banner-box .ov-title { font-family:'Bebas Neue',sans-serif; font-size:34px; color:var(--green); letter-spacing:3px; line-height:1.1; }
-  .overlay-banner-box .ov-sub { font-size:14px; color:var(--text2); margin-top:8px; }
-  .overlay-banner-box .ov-names { font-size:12px; color:var(--text); margin-top:12px; font-weight:600; line-height:1.8; padding:10px; background:rgba(0,230,118,0.06); border-radius:12px; }
+  .pagelle-match-header { background:var(--bg2); border:1px solid var(--gray3); margin:12px 12px 8px; border-radius:4px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; }
+  .pmh-score { font-family:'Georgia',serif; font-size:28px; font-weight:700; color:var(--gold); }
+  .pmh-date  { font-size:9px; color:var(--gray2); text-transform:uppercase; letter-spacing:2px; font-family:'Arial',sans-serif; }
 
   /* FORMAZIONE */
-  .formazione-wrap { display:flex; gap:10px; margin-bottom:14px; }
-  .formazione-team { flex:1; background:var(--card); border-radius:16px; padding:14px; border:1px solid rgba(255,255,255,0.06); }
-  .formazione-team h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; margin-bottom:10px; text-align:center; }
-  .formazione-team.team-a h3 { color:var(--green); }
-  .formazione-team.team-b h3 { color:#2979ff; }
-  .formazione-player { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:13px; font-weight:600; }
+  .formazione-wrap { display:flex; gap:8px; padding:0 12px 12px; }
+  .formazione-team { flex:1; background:var(--bg2); border-radius:3px; padding:10px; border:1px solid var(--gray3); }
+  .formazione-team h3 { font-family:'Georgia',serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; text-align:center; }
+  .formazione-team.team-a h3 { color:var(--gold); }
+  .formazione-team.team-b h3 { color:#7eb8ff; }
+  .formazione-player { display:flex; align-items:center; gap:6px; padding:5px 0; border-bottom:1px solid var(--gray3); font-size:12px; font-weight:700; color:var(--white); font-family:'Georgia',serif; }
   .formazione-player:last-child { border-bottom:none; }
-  .formazione-player .fp-emoji { font-size:18px; }
-  .formazione-player .fp-gk { font-size:10px; background:rgba(255,214,0,0.15); color:var(--yellow); border-radius:6px; padding:1px 5px; margin-left:4px; }
+  .fp-emoji { font-size:14px; }
+  .fp-gk { font-size:8px; background:rgba(255,215,0,0.12); color:var(--gold); border-radius:2px; padding:1px 4px; margin-left:3px; font-weight:700; font-family:'Arial',sans-serif; text-transform:uppercase; }
+
+  /* BANNER */
+  .banner-dieci { background:linear-gradient(135deg,#0d1500,#150d00); border:1px solid var(--gold); border-radius:4px; padding:18px 16px; margin:12px; text-align:center; animation:pulseGold 1.5s ease-in-out infinite; }
+  @keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,0.3)}50%{box-shadow:0 0 0 8px rgba(255,215,0,0)}}
+  .banner-emoji { font-size:40px; display:block; }
+  .banner-title { font-family:'Georgia',serif; font-size:24px; font-weight:700; color:var(--gold); letter-spacing:3px; margin-top:6px; }
+  .banner-sub   { font-size:11px; color:var(--gray1); margin-top:4px; font-family:'Arial',sans-serif; }
+  .banner-names { font-size:10px; color:var(--text); margin-top:10px; font-weight:700; background:var(--gold3); border-radius:3px; padding:8px; letter-spacing:0.5px; font-family:'Georgia',serif; }
+
+  /* OVERLAY */
+  .overlay-banner { position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; animation:fadeInOverlay 0.3s ease; }
+  @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+  .overlay-banner-box { background:#0a0c18; border:2px solid var(--gold); border-radius:6px; padding:30px 22px; margin:20px; text-align:center; position:relative; box-shadow:0 0 50px rgba(255,215,0,0.2); max-width:340px; width:100%; animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+  @keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
+  .overlay-close { position:absolute; top:10px; right:12px; background:var(--gray3); border:none; color:var(--gray1); font-size:14px; width:26px; height:26px; border-radius:3px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'Arial',sans-serif; }
+  .ov-emoji  { font-size:52px; display:block; animation:bounceBall 0.7s ease-in-out infinite alternate; margin-bottom:12px; }
+  .ov-title  { font-family:'Georgia',serif; font-size:28px; font-weight:700; color:var(--gold); letter-spacing:3px; line-height:1.1; }
+  .ov-sub    { font-size:12px; color:var(--gray1); margin-top:8px; font-family:'Arial',sans-serif; }
+  .ov-names  { font-size:11px; color:var(--text); margin-top:12px; font-weight:700; line-height:1.8; padding:10px; background:var(--gold3); border-radius:3px; font-family:'Georgia',serif; }
 
   /* STREAK */
-  .streak-badge { background:rgba(255,214,0,0.15); border:1px solid var(--yellow); color:var(--yellow); font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; padding:2px 7px; border-radius:10px; margin-left:6px; }
+  .streak-badge { background:rgba(255,107,0,0.12); border:1px solid #ff6b00; color:#ff6b00; font-size:8px; font-weight:700; padding:1px 6px; border-radius:2px; margin-left:5px; letter-spacing:1px; font-family:'Arial',sans-serif; text-transform:uppercase; }
 
-  /* GRAFICO GOL */
-  .chart-wrap { background:var(--card); border-radius:16px; padding:16px; margin-bottom:14px; overflow-x:auto; }
-  .chart-bars { display:flex; align-items:flex-end; gap:6px; height:120px; padding-bottom:24px; position:relative; min-width:300px; }
-  .chart-bar-col { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; min-width:28px; }
-  .chart-bar { width:100%; border-radius:6px 6px 0 0; background:var(--green); opacity:0.85; transition:height 0.5s ease; position:relative; min-height:4px; }
-  .chart-bar:hover { opacity:1; }
-  .chart-val { font-family:'Bebas Neue',sans-serif; font-size:13px; color:var(--green); }
-  .chart-lbl { font-size:9px; color:var(--text2); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:36px; }
+  /* CHART */
+  .chart-wrap { background:var(--card); border:1px solid var(--gray3); border-radius:4px; padding:14px; margin:0 12px 12px; overflow-x:auto; }
+  .chart-bars { display:flex; align-items:flex-end; gap:5px; height:100px; padding-bottom:22px; min-width:260px; }
+  .chart-bar-col { display:flex; flex-direction:column; align-items:center; gap:3px; flex:1; min-width:24px; }
+  .chart-bar { width:100%; border-radius:2px 2px 0 0; background:linear-gradient(180deg,var(--gold),var(--gold2)); min-height:3px; }
+  .chart-val { font-family:'Georgia',serif; font-size:11px; font-weight:700; color:var(--gold); }
+  .chart-lbl { font-size:8px; color:var(--gray2); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:32px; font-weight:700; font-family:'Arial',sans-serif; text-transform:uppercase; }
 
-  /* NOTIFICA BADGE */
-  .notif-btn { background:rgba(0,230,118,0.1); border:1.5px solid var(--green); color:var(--green); border-radius:12px; padding:8px 14px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:1px; cursor:pointer; width:100%; margin-bottom:10px; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  /* NOTIFICHE */
+  .notif-btn { background:var(--gold3); border:1px solid var(--gold); color:var(--gold); border-radius:3px; padding:10px 14px; font-size:10px; font-weight:700; letter-spacing:2px; cursor:pointer; width:100%; margin-bottom:8px; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; text-transform:uppercase; font-family:'Arial',sans-serif; }
+  .notif-btn.subscribed { background:rgba(255,215,0,0.15); }
   .notif-btn:active { transform:scale(0.97); }
-  .notif-btn.subscribed { background:rgba(0,230,118,0.2); }
 
+  /* MODALS */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:500; display:flex; align-items:flex-end; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal { background:var(--bg2); border-radius:8px 8px 0 0; width:100%; padding:20px 16px 32px; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1); max-height:90vh; overflow-y:auto; border-top:2px solid var(--gold); }
+  .modal-overlay.open .modal { transform:translateY(0); }
+  .modal-handle { width:36px; height:2px; background:var(--gray3); border-radius:1px; margin:0 auto 18px; }
+  .modal h3 { font-family:'Georgia',serif; font-size:22px; font-weight:700; letter-spacing:2px; margin-bottom:16px; color:var(--gold); }
+  .form-field { margin-bottom:14px; }
+  .form-field label { display:block; font-size:8px; text-transform:uppercase; letter-spacing:2px; color:var(--gray2); margin-bottom:6px; font-weight:700; font-family:'Arial',sans-serif; }
+  .form-field input,.form-field select { width:100%; background:var(--bg); border:1px solid var(--gray3); border-radius:3px; padding:10px 12px; color:var(--text); font-family:'Georgia',serif; font-size:14px; outline:none; transition:border-color 0.2s; }
+  .form-field input:focus,.form-field select:focus { border-color:var(--gold); }
+  .form-field select option { background:var(--bg2); }
+  .form-actions { display:flex; gap:8px; margin-top:6px; }
+  .btn-full { width:100%; padding:12px; border-radius:3px; border:none; cursor:pointer; font-family:'Georgia',serif; font-weight:700; font-size:14px; letter-spacing:1px; transition:all 0.2s; }
+  .btn-lime { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--bg); }
+  .btn-lime:active { transform:scale(0.98); }
+  .btn-outline { background:transparent; border:1px solid var(--gray3); color:var(--gray2); font-family:'Arial',sans-serif; font-size:12px; }
+
+  /* SCORER */
+  .scorer-players { display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto; margin-bottom:8px; }
+  .scorer-player-row { display:flex; align-items:center; gap:8px; background:var(--bg); border-radius:3px; padding:7px 10px; border:1px solid var(--gray3); }
+  .scorer-player-name { flex:1; font-weight:700; font-size:13px; font-family:'Georgia',serif; }
+  .scorer-count { font-family:'Georgia',serif; font-size:22px; font-weight:700; color:var(--gold); min-width:24px; text-align:center; }
+  .scorer-inc { background:var(--gold); color:var(--bg); border:none; width:30px; height:30px; border-radius:3px; font-size:16px; cursor:pointer; font-weight:700; font-family:'Georgia',serif; }
+  .scorer-dec { background:var(--bg3); color:var(--gray2); border:1px solid var(--gray3); width:30px; height:30px; border-radius:3px; font-size:16px; cursor:pointer; }
+  .scorer-inc:active,.scorer-dec:active { transform:scale(0.9); }
+  .scorer-inc:disabled { opacity:0.25; cursor:not-allowed; }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--gold); color:var(--bg); border-radius:3px; padding:10px 18px; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; z-index:600; opacity:0; transition:all 0.3s; pointer-events:none; white-space:nowrap; font-family:'Georgia',serif; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.error { background:var(--red); color:#fff; font-family:'Arial',sans-serif; }
+
+  ::-webkit-scrollbar{width:0;height:0}
+
+  .waitlist-badge { background:rgba(255,140,0,0.12); border:1px solid var(--orange); color:var(--orange); font-size:8px; font-weight:700; padding:1px 5px; border-radius:2px; margin-left:5px; letter-spacing:1px; font-family:'Arial',sans-serif; }
+  .waitlist-pos { font-family:'Georgia',serif; font-size:16px; font-weight:700; color:var(--orange); min-width:20px; text-align:center; }
+  .dot-orange{background:var(--orange)} .dot-green{background:var(--green)} .dot-red{background:var(--red)} .dot-yellow{background:var(--gold)}
 </style>
 </head>
 <body>
 
 <!-- SPLASH -->
-
+<div id="splash">
+  <img src="./icon-192.png" alt="F.I.C.A.">
+  <div class="ea-text">EA Sports</div>
+  <h1>F.I.C.A.</h1>
+  <div class="badge">Giovedì Sera</div>
+  <p>Connessione in corso...</p>
+</div>
 
 <div class="app">
   <header>
     <div class="header-logo">
-      <img src="file:///C:/Users/GiorgioPuglisi/Downloads/icon-192.png" alt="logo">
-      <div><h1>F.I.C.A.</h1><span>Giovedì Sera</span></div>
+      <img src="./icon-192.png" alt="logo">
+      <div>
+        <span class="ea-label">EA Sports</span>
+        <h1>F.I.C.A.</h1>
+      </div>
     </div>
-    <div class="sync-badge online" id="sync-badge">
-      <div class="sync-dot"></div><span id="sync-label">Live</span>
+    <div class="sync-badge syncing" id="sync-badge">
+      <div class="sync-dot"></div><span id="sync-label">...</span>
     </div>
   </header>
 
@@ -311,176 +306,127 @@
 
     <!-- HOME -->
     <div class="section active" id="sec-home">
-      <div class="next-match">
-        <div class="label">Prossima Partita</div>
-        <div class="date" id="nextDate">11 Giu</div>
-        <div class="time">Ore 21:00</div>
-        <div class="place">📍 <span>Campo Sintetico Centro Sportivo</span></div>
+      <div class="campo-hero">
+        <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg" width="100%" height="140">
+          <rect width="360" height="140" fill="#1a3a1a"/>
+          <rect x="0"   width="36" height="140" fill="#1e421e"/>
+          <rect x="72"  width="36" height="140" fill="#1e421e"/>
+          <rect x="144" width="36" height="140" fill="#1e421e"/>
+          <rect x="216" width="36" height="140" fill="#1e421e"/>
+          <rect x="288" width="36" height="140" fill="#1e421e"/>
+          <rect x="12" y="10" width="336" height="120" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <line x1="180" y1="10" x2="180" y2="130" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <circle cx="180" cy="70" r="24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <circle cx="180" cy="70" r="2" fill="rgba(255,255,255,0.8)"/>
+          <rect x="12" y="36" width="48" height="68" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <rect x="12" y="50" width="22" height="40" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          <circle cx="72" cy="70" r="2" fill="rgba(255,255,255,0.7)"/>
+          <rect x="300" y="36" width="48" height="68" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+          <rect x="326" y="50" width="22" height="40" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          <circle cx="288" cy="70" r="2" fill="rgba(255,255,255,0.7)"/>
+          <rect x="2" y="50" width="12" height="40" fill="none" stroke="#ffd700" stroke-width="2"/>
+          <line x1="2" y1="53" x2="14" y2="53" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="58" x2="14" y2="58" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="63" x2="14" y2="63" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="68" x2="14" y2="68" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="73" x2="14" y2="73" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="78" x2="14" y2="78" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="2" y1="83" x2="14" y2="83" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="6"  y1="50" x2="6"  y2="90" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="10" y1="50" x2="10" y2="90" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <rect x="346" y="50" width="12" height="40" fill="none" stroke="#ffd700" stroke-width="2"/>
+          <line x1="346" y1="53" x2="358" y2="53" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="58" x2="358" y2="58" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="63" x2="358" y2="63" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="68" x2="358" y2="68" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="73" x2="358" y2="73" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="78" x2="358" y2="78" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="346" y1="83" x2="358" y2="83" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="350" y1="50" x2="350" y2="90" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <line x1="354" y1="50" x2="354" y2="90" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+          <rect width="360" height="140" fill="rgba(0,0,0,0.45)"/>
+          <text x="180" y="36" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Arial" letter-spacing="4" font-weight="700">PROSSIMA PARTITA</text>
+          <text x="180" y="72" text-anchor="middle" fill="white" font-size="34" font-family="Arial" font-weight="900" letter-spacing="-1" id="nextDate">—</text>
+          <text x="180" y="90" text-anchor="middle" fill="#ffd700" font-size="12" font-family="Arial" font-weight="900" letter-spacing="2">ORE 21:00</text>
+          <text x="180" y="110" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8" font-family="Arial" letter-spacing="2">📍 CAMPO SINTETICO</text>
+        </svg>
       </div>
-      <div class="quick-stats">
-        <div class="qstat"><div class="val" id="home-confermati">10</div><div class="lbl">✅ Confermati</div></div>
-        <div class="qstat"><div class="val" id="home-partite">1</div><div class="lbl">🏆 Partite</div></div>
-        <div class="qstat"><div class="val" id="home-gol">0</div><div class="lbl">⚽ Gol Tot.</div></div>
+      <div class="stats-strip">
+        <div class="stat-cell"><div class="stat-val" id="home-confermati">—</div><div class="stat-lbl">✅ Confermati</div></div>
+        <div class="stat-cell"><div class="stat-val" id="home-partite">—</div><div class="stat-lbl">🏆 Partite</div></div>
+        <div class="stat-cell"><div class="stat-val" id="home-gol">—</div><div class="stat-lbl">⚽ Gol Tot.</div></div>
       </div>
-      <div id="home-banner-dieci"><div class="banner-dieci" style="margin-bottom:14px">
-        <span class="banner-emoji">🎉</span>
-        <div class="banner-title">SIAMO IN 10! SI GIOCA!</div>
-        <div class="banner-sub">Giovedì si scende in campo 💪</div>
-        <div class="banner-names">Massi  ·  Salva  ·  Lele  ·  Giorgio  ·  Dany  ·  Ale Brag  ·  Joshua  ·  Chapo  ·  Diego  ·  Ste</div>
-      </div></div>
-      <div class="card" id="card-formazione" style="display: block;">
-        <div class="card-title" style="justify-content:space-between">
-          <span>⚽ Formazione Suggerita</span>
-          <button onclick="rigeneraFormazione()" style="background:rgba(0,230,118,0.15);border:1.5px solid var(--green);color:var(--green);border-radius:10px;padding:4px 12px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;cursor:pointer;transition:all 0.2s" id="btn-rigenera">🔀 Rigenera</button>
+      <div id="home-banner-dieci"></div>
+      <div class="ea-card" id="card-formazione" style="display:none">
+        <div class="ea-card-title"><span>⚽ Formazione Suggerita</span>
+          <button onclick="rigeneraFormazione()" id="btn-rigenera" style="background:var(--gold3);border:1px solid var(--gold);color:var(--gold);border-radius:3px;padding:3px 10px;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;font-family:'Arial',sans-serif">🔀 Rigenera</button>
         </div>
-        <div class="formazione-wrap" id="home-formazione">
-    <div class="formazione-team team-a">
-      <h3>SQUADRA A</h3>
-      <div class="formazione-player">
-        <span class="fp-emoji">⚡</span>
-        <span>Salva</span>
-        <span class="fp-gk">🧤</span>
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🌊</span>
-        <span>Diego</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">👤</span>
-        <span>Ste</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🚀</span>
-        <span>Lele</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🎯</span>
-        <span>Ale Brag</span>
-        
+        <div class="formazione-wrap" id="home-formazione"></div>
+        <div style="font-size:8px;color:var(--gray2);text-align:center;padding:0 0 10px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Un portiere per squadra · divisione casuale</div>
       </div>
-    </div>
-    <div class="formazione-team team-b">
-      <h3>SQUADRA B</h3>
-      <div class="formazione-player">
-        <span class="fp-emoji">🦁</span>
-        <span>Massi</span>
-        <span class="fp-gk">🧤</span>
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🦊</span>
-        <span>Giorgio</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🐉</span>
-        <span>Chapo</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">🦅</span>
-        <span>Joshua</span>
-        
-      </div><div class="formazione-player">
-        <span class="fp-emoji">💥</span>
-        <span>Dany</span>
-        
+      <div class="ea-card"><div class="ea-card-title"><span>📊 Top Marcatori</span></div><div id="home-top3"></div></div>
+      <div class="ea-card"><div class="ea-card-title"><span>📅 Ultimo Risultato</span></div><div id="home-lastmatch"></div></div>
+      <div class="ea-card">
+        <div class="ea-card-title"><span>📈 Andamento Gol</span></div>
+        <div class="chart-wrap" id="home-chart"><div style="text-align:center;color:var(--gray2);padding:10px;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Aggiungi partite per il grafico</div></div>
       </div>
-    </div></div>
-        <div style="font-size:10px;color:var(--text2);text-align:center;margin-top:6px">Un portiere per squadra · divisione casuale bilanciata</div>
-      </div>
-      <div class="card"><div class="card-title">📊 Top Marcatori</div><div id="home-top3" class="scorers-list"><div class="scorer-row" style="margin-bottom:8px">
-          <div class="rank gold">🥇</div>
-          <div style="font-size:22px">🦁</div>
-          <div class="scorer-info">
-            <div class="scorer-name">Massi</div>
-            <div class="scorer-detail">0 presenze</div>
-            <div class="progress-bar-wrap"><div class="progress-bar" style="width:0%"></div></div>
-          </div>
-          <div class="scorer-goals">0</div>
-        </div><div class="scorer-row" style="margin-bottom:8px">
-          <div class="rank silver">🥈</div>
-          <div style="font-size:22px">⚡</div>
-          <div class="scorer-info">
-            <div class="scorer-name">Salva</div>
-            <div class="scorer-detail">0 presenze</div>
-            <div class="progress-bar-wrap"><div class="progress-bar" style="width:0%"></div></div>
-          </div>
-          <div class="scorer-goals">0</div>
-        </div><div class="scorer-row" style="margin-bottom:8px">
-          <div class="rank bronze">🥉</div>
-          <div style="font-size:22px">🔥</div>
-          <div class="scorer-info">
-            <div class="scorer-name">Teo</div>
-            <div class="scorer-detail">0 presenze</div>
-            <div class="progress-bar-wrap"><div class="progress-bar" style="width:0%"></div></div>
-          </div>
-          <div class="scorer-goals">0</div>
-        </div></div></div>
-      <div class="card"><div class="card-title">📅 Ultimo Risultato</div><div id="home-lastmatch">
-      <div class="match-meta"><span>📅 Gio 4 Giu</span></div>
-      <div class="match-score">
-        <div class="team-score">
-          <div class="team-name">Bianchi</div>
-          <div class="score-num" style="color:var(--text)">0</div>
+      <div class="ea-card">
+        <div class="ea-card-title"><span>🔔 Notifiche</span></div>
+        <div style="padding:10px 12px 12px">
+          <button class="notif-btn" id="notif-btn" onclick="toggleNotifiche()">🔔 Attiva Notifiche</button>
+          <div style="font-size:8px;color:var(--gray2);text-align:center;text-transform:uppercase;letter-spacing:1px;font-weight:700;font-family:'Arial',sans-serif">Sab → Mer alle 10:00 · stop quando siamo in 10 ✅</div>
         </div>
-        <div class="score-sep">-</div>
-        <div class="team-score">
-          <div class="team-name">Rossi</div>
-          <div class="score-num" style="color:var(--text)">0</div>
-        </div>
-      </div>
-      </div></div>
-      <div class="card">
-        <div class="card-title">📈 Andamento Gol</div>
-        <div class="chart-wrap" id="home-chart"><div class="chart-bars">
-    <div class="chart-bar-col">
-        <div class="chart-val">0</div>
-        <div class="chart-bar" style="height:0px" title="Bianchi 0-0 Rossi"></div>
-        <div class="chart-lbl">4 Giu</div>
-      </div>
-  </div></div>
-      </div>
-      <div class="card">
-        <div class="card-title">🔔 Notifiche</div>
-        <button class="notif-btn" id="notif-btn" onclick="toggleNotifiche()">🔔 Attiva notifiche del giovedì</button>
-        <div style="font-size:11px;color:var(--text2);text-align:center">Da sabato a mercoledì alle 10:00 — si ferma quando siamo in 10 ✅</div>
       </div>
     </div>
 
     <!-- CONVOCAZIONI -->
     <div class="section" id="sec-convoca">
-      <div class="convoca-header"><h2>Convocazioni</h2><button class="pill" onclick="openModal(&#39;modal-player&#39;)">+ Giocatore</button></div>
-      <div class="status-bar" id="convoca-status"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px 6px">
+        <div style="font-size:8px;color:var(--gray2);letter-spacing:3px;text-transform:uppercase;font-weight:900">▶ Convocazioni</div>
+        <button onclick="openModal('modal-player')" style="background:var(--gold3);border:1px solid var(--gold);color:var(--gold);border-radius:3px;padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;font-family:'Arial',sans-serif">+ Giocatore</button>
+      </div>
+      <div class="status-bar-ea" id="convoca-status"></div>
       <div id="banner-dieci"></div>
-      <div class="player-list" id="player-list"><div style="text-align:center;padding:30px;color:var(--text2)">Caricamento...</div></div>
+      <div id="player-list"><div style="text-align:center;padding:30px;color:var(--gray2);font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:700">Caricamento...</div></div>
     </div>
 
     <!-- STATS -->
     <div class="section" id="sec-stats">
-      <div class="section-label">Classifica Stagione</div>
-      <div class="stat-tabs">
-        <button class="stat-tab active" onclick="switchStatTab(&#39;goals&#39;,this)">⚽ Gol</button>
-        <button class="stat-tab" onclick="switchStatTab(&#39;presenze&#39;,this)">📋 Presenze</button>
-        <button class="stat-tab" onclick="switchStatTab(&#39;mvp&#39;,this)">⭐ MVP</button>
-        <button class="stat-tab" onclick="switchStatTab(&#39;vinte&#39;,this)">🏆 Vinte</button>
+      <div class="sec-label">▶ Classifica Stagione</div>
+      <div class="stat-tabs-ea">
+        <button class="stat-tab-ea active" onclick="switchStatTab('goals',this)">⚽ Gol</button>
+        <button class="stat-tab-ea" onclick="switchStatTab('presenze',this)">📋 Presenze</button>
+        <button class="stat-tab-ea" onclick="switchStatTab('mvp',this)">⭐ MVP</button>
+        <button class="stat-tab-ea" onclick="switchStatTab('vinte',this)">🏆 Vinte</button>
       </div>
-      <div class="scorers-list" id="stats-list"></div>
+      <div id="stats-list"></div>
     </div>
 
     <!-- PARTITE -->
     <div class="section" id="sec-partite">
-      <div class="convoca-header"><h2>Storico Partite</h2><button class="pill" onclick="openModal(&#39;modal-match&#39;)">+ Partita</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px 6px">
+        <div style="font-size:8px;color:var(--gray2);letter-spacing:3px;text-transform:uppercase;font-weight:900">▶ Storico Partite</div>
+        <button onclick="openModal('modal-match')" style="background:var(--gold3);border:1px solid var(--gold);color:var(--gold);border-radius:3px;padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;font-family:'Arial',sans-serif">+ Partita</button>
+      </div>
       <div id="matches-list"></div>
     </div>
 
     <!-- MEDIA -->
     <div class="section" id="sec-media">
-      <div class="convoca-header"><h2>Foto &amp; Video</h2><button class="pill" onclick="openModal(&#39;modal-media&#39;)">+ Aggiungi</button></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px 6px">
+        <div style="font-size:8px;color:var(--gray2);letter-spacing:3px;text-transform:uppercase;font-weight:900">▶ Foto &amp; Video</div>
+        <button onclick="openModal('modal-media')" style="background:var(--gold3);border:1px solid var(--gold);color:var(--gold);border-radius:3px;padding:5px 12px;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;font-family:'Arial',sans-serif">+ Aggiungi</button>
+      </div>
       <div class="media-grid" id="media-grid"></div>
     </div>
 
   <!-- PAGELLE -->
     <div class="section" id="sec-pagelle">
-      <div class="convoca-header"><h2>Pagelle</h2></div>
+      <div style="padding:10px 14px 6px"><div style="font-size:8px;color:var(--gray2);letter-spacing:3px;text-transform:uppercase;font-weight:900">▶ Pagelle</div></div>
       <div class="form-field" style="margin-bottom:14px">
         <label style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text2);display:block;margin-bottom:8px">Seleziona Partita</label>
-        <select id="pagelle-match-select" onchange="onPagellaMatchChange()" style="width:100%;background:var(--card);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:var(--text);font-family:&#39;Barlow&#39;,sans-serif;font-size:15px;outline:none">
+        <select id="pagelle-match-select" onchange="onPagellaMatchChange()"
+          style="width:100%;background:var(--card);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;outline:none">
           <option value="">-- Scegli una partita --</option>
         </select>
       </div>
@@ -490,17 +436,17 @@
   </div><!-- /content -->
 
   <nav>
-    <button class="nav-btn active" onclick="showSection(&#39;home&#39;,this)"><span class="icon">🏠</span>Home</button>
-    <button class="nav-btn" onclick="showSection(&#39;convoca&#39;,this)"><span class="icon">📋</span>Lista</button>
-    <button class="nav-btn" onclick="showSection(&#39;stats&#39;,this)"><span class="icon">📊</span>Stats</button>
-    <button class="nav-btn" onclick="showSection(&#39;partite&#39;,this)"><span class="icon">🏆</span>Partite</button>
-    <button class="nav-btn" onclick="showSection(&#39;media&#39;,this)"><span class="icon">📸</span>Media</button>
-    <button class="nav-btn" onclick="showSection(&#39;pagelle&#39;,this)"><span class="icon">⭐</span>Pagelle</button>
+    <button class="nav-btn active" onclick="showSection('home',this)"><span class="icon">🏠</span>Home</button>
+    <button class="nav-btn" onclick="showSection('convoca',this)"><span class="icon">📋</span>Lista</button>
+    <button class="nav-btn" onclick="showSection('stats',this)"><span class="icon">📊</span>Stats</button>
+    <button class="nav-btn" onclick="showSection('partite',this)"><span class="icon">🏆</span>Partite</button>
+    <button class="nav-btn" onclick="showSection('media',this)"><span class="icon">📸</span>Media</button>
+    <button class="nav-btn" onclick="showSection('pagelle',this)"><span class="icon">⭐</span>Pagelle</button>
   </nav>
 </div>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="modal-player" onclick="closeModalOutside(event,&#39;modal-player&#39;)">
+<div class="modal-overlay" id="modal-player" onclick="closeModalOutside(event,'modal-player')">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Giocatore</h3>
     <div class="form-field"><label>Nome</label><input type="text" id="f-name" placeholder="es. Marco"></div>
@@ -513,13 +459,13 @@
       </select>
     </div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-player&#39;)">Annulla</button>
-      <button class="btn-full btn-green" style="flex:2" onclick="addPlayer()">Aggiungi</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-player')">Annulla</button>
+      <button class="btn-full btn-lime"   style="flex:2" onclick="addPlayer()">Aggiungi</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-match" onclick="closeModalOutside(event,&#39;modal-match&#39;)">
+<div class="modal-overlay" id="modal-match" onclick="closeModalOutside(event,'modal-match')">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Partita</h3>
     <div class="form-field"><label>Data</label><input type="date" id="m-date"></div>
@@ -537,13 +483,13 @@
       <div class="scorer-players" id="scorer-players-list"></div>
     </div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-match&#39;)">Annulla</button>
-      <button class="btn-full btn-green" style="flex:2" onclick="addMatch()">Salva</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-match')">Annulla</button>
+      <button class="btn-full btn-lime"   style="flex:2" onclick="addMatch()">Salva</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-media" onclick="closeModalOutside(event,&#39;modal-media&#39;)">
+<div class="modal-overlay" id="modal-media" onclick="closeModalOutside(event,'modal-media')">
   <div class="modal">
     <div class="modal-handle"></div><h3>Aggiungi Media</h3>
     <div class="form-field"><label>Tipo</label>
@@ -556,8 +502,8 @@
     <div class="form-field"><label>Descrizione</label><input type="text" id="med-desc" placeholder="es. Gol di Massi 🔥"></div>
     <div class="form-field"><label>Data</label><input type="date" id="med-date"></div>
     <div class="form-actions">
-      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal(&#39;modal-media&#39;)">Annulla</button>
-      <button class="btn-full btn-green" style="flex:2" onclick="addMedia()">Aggiungi</button>
+      <button class="btn-full btn-outline" style="flex:1" onclick="closeModal('modal-media')">Annulla</button>
+      <button class="btn-full btn-lime"   style="flex:2" onclick="addMedia()">Aggiungi</button>
     </div>
   </div>
 </div>
@@ -616,7 +562,8 @@ function getNextThursday(){
   const m=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
   return `${next.getDate()} ${m[next.getMonth()]}`;
 }
-document.getElementById('nextDate').textContent=getNextThursday();
+const ndEls = document.querySelectorAll('#nextDate');
+  ndEls.forEach(el=>{ el.textContent=getNextThursday(); });
 document.getElementById('m-date').value=new Date().toISOString().split('T')[0];
 document.getElementById('med-date').value=new Date().toISOString().split('T')[0];
 
@@ -664,15 +611,16 @@ function renderHome(){
   document.getElementById('home-top3').innerHTML=top3.length
     ?top3.map((p,i)=>{
         const medals=['🥇','🥈','🥉'],rc=i===0?'gold':i===1?'silver':'bronze';
-        return `<div class="scorer-row" style="margin-bottom:8px">
-          <div class="rank ${rc}">${medals[i]}</div>
-          <div style="font-size:22px">${emoji(p.name)}</div>
-          <div class="scorer-info">
-            <div class="scorer-name">${p.name}</div>
-            <div class="scorer-detail">${p.presenze||0} presenze${(()=>{const s=calcolaStreak(p.name);return s>=3?` 🔥${s}`:''})()}</div>
-            <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.round((p.goals||0)/maxG*100)}%"></div></div>
+        const s=calcolaStreak(p.name);
+        return `<div class="scorer-row-ea">
+          <div class="scorer-rank ${rc}">${medals[i]}</div>
+          <div class="scorer-emoji">${emoji(p.name)}</div>
+          <div class="scorer-info-ea">
+            <div class="scorer-name-ea">${p.name}${s>=3?`<span class="streak-badge">🔥${s}</span>`:''}</div>
+            <div class="scorer-sub-ea">${p.presenze||0} presenze</div>
+            <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round((p.goals||0)/maxG*100)}%"></div></div>
           </div>
-          <div class="scorer-goals">${p.goals||0}</div>
+          <div class="scorer-goals-ea">${p.goals||0}</div>
         </div>`;}).join('')
     :`<div style="text-align:center;color:var(--text2);padding:10px">Nessun dato ancora</div>`;
   if(matches.length){
@@ -705,10 +653,10 @@ function renderPlayers(){
   const pend     = players.filter(p=>p.status==='pending').length;
   const waitlist = players.filter(p=>p.status==='waitlist').length;
   document.getElementById('convoca-status').innerHTML=`
-    <div class="status-chip"><div class="dot dot-green"></div>${conf} Sì</div>
-    <div class="status-chip"><div class="dot dot-red"></div>${dec} No</div>
-    <div class="status-chip"><div class="dot dot-yellow"></div>${pend} In attesa</div>
-    ${waitlist>0?`<div class="status-chip"><div class="dot dot-orange"></div>${waitlist} In coda</div>`:''}`;
+    <div class="status-chip-ea"><div class="sdot sdot-g"></div>${conf} Sì</div>
+    <div class="status-chip-ea"><div class="sdot sdot-r"></div>${dec} No</div>
+    <div class="status-chip-ea"><div class="sdot sdot-y"></div>${pend} In attesa</div>
+    ${waitlist>0?`<div class="status-chip-ea"><div class="sdot sdot-o"></div>${waitlist} In coda</div>`:''}`;
   // Conta portieri già assegnati
   const gkCount = players.filter(p=>p.goalkeeper && p.status==='confirmed').length;
   const gkFull  = gkCount >= 2;
@@ -755,18 +703,21 @@ function renderPlayers(){
     const isGk = !!p.goalkeeper;
     const canToggle = p.status==='confirmed' && (isGk || !gkFull);
     const gkBtn = p.status==='confirmed'
-      ? `<button class="goalkeeper-btn ${isGk?'is-gk':''}" ${canToggle?'':'disabled'} onclick="toggleGoalkeeper(event,'${p.id}',${isGk})" title="${isGk?'Rimuovi portiere':gkFull?'2 portieri già scelti':'Designa portiere'}">🧤</button>`
+      ? `<button class="gk-btn-ea ${isGk?'is-gk':''}" ${canToggle?'':'disabled'} onclick="toggleGoalkeeper(event,'${p.id}',${isGk})">🧤</button>`
       : '';
-    const gkBadge  = isGk ? '<span class="goalkeeper-badge">🧤 Portiere</span>' : '';
-    const waitBadge= isWait ? `<span class="waitlist-badge">⏱️ Coda #${waitPos}</span>` : '';
-    const posNum   = isWait ? `<div class="waitlist-pos">#${waitPos}</div>` : '';
-    return `<div class="player-row ${cls}" onclick="cycleStatus('${p.id}','${p.status}',${conf})">
-      <div class="player-avatar">${emoji(p.name)}</div>
-      <div class="player-info">
-        <div class="player-name">${p.name}${gkBadge}${waitBadge}</div>
-        <div class="player-sub">⚽ ${p.goals||0} gol · 📋 ${p.presenze||0} presenze</div>
+    const gkBadge  = isGk ? '<span class="gk-badge-ea">🧤 GK</span>' : '';
+    const waitBadge= isWait ? `<span class="wait-badge-ea">⏱ #${waitPos}</span>` : '';
+    const nameClass = p.status==='confirmed'?'':'muted';
+    const rating = Math.min(99,Math.max(60,60+Math.round(((p.goals||0)*2+(p.presenze||0))/2)));
+    return `<div class="player-row-ea ${cls}" onclick="cycleStatus('${p.id}','${p.status}',${conf})">
+      <div class="player-num">${sortedPlayers.indexOf(p)+1}</div>
+      <div class="player-emo">${emoji(p.name)}</div>
+      <div class="player-info-ea">
+        <div class="player-name-ea ${nameClass}">${p.name}${gkBadge}${waitBadge}</div>
+        <div class="player-sub-ea">⚽ ${p.goals||0} · 📋 ${p.presenze||0}</div>
       </div>
-      <div class="player-status" style="display:flex;align-items:center;gap:4px">${gkBtn}${posNum}<span>${icon}</span></div>
+      <div class="player-rating">${rating}</div>
+      <div style="display:flex;align-items:center;gap:4px;margin-left:4px">${gkBtn}<span class="player-status-ea">${icon}</span></div>
     </div>`;}).join('');
 }
 window.cycleStatus=async function(id,current,confCount){
@@ -830,20 +781,21 @@ function renderStats(key){
   const icons={goals:'⚽',presenze:'📋',mvp:'⭐',vinte:'🏆'};
   document.getElementById('stats-list').innerHTML=sorted.map((p,i)=>{
     const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
-    return `<div class="scorer-row" style="margin-bottom:8px">
-      <div class="rank ${rc}">${i+1}</div>
-      <div style="font-size:20px">${emoji(p.name)}</div>
-      <div class="scorer-info">
-        <div class="scorer-name">${p.name}</div>
-        <div class="scorer-detail">⚽ ${p.goals||0} gol · 📋 ${p.presenze||0} presenze${(()=>{const s=calcolaStreak(p.name);return s>=3?` <span class="streak-badge">🔥 ${s} di fila</span>`:''})()}</div>
-        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${Math.round((p[key]||0)/maxVal*100)}%"></div></div>
+    const s=calcolaStreak(p.name);
+    return `<div class="scorer-row-ea">
+      <div class="scorer-rank ${rc}">${i+1}</div>
+      <div class="scorer-emoji">${emoji(p.name)}</div>
+      <div class="scorer-info-ea">
+        <div class="scorer-name-ea">${p.name}${s>=3?`<span class="streak-badge">🔥${s}</span>`:''}</div>
+        <div class="scorer-sub-ea">⚽ ${p.goals||0} gol · 📋 ${p.presenze||0} presenze</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round((p[key]||0)/maxVal*100)}%"></div></div>
       </div>
-      <div class="scorer-goals">${icons[key]} ${p[key]||0}</div>
+      <div class="scorer-goals-ea">${p[key]||0}</div>
     </div>`;}).join('');
 }
 window.switchStatTab=function(key,btn){
   currentStatKey=key;
-  document.querySelectorAll('.stat-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.stat-tab-ea').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active'); renderStats(key);
 };
 
@@ -853,21 +805,23 @@ function renderMatches(){
   if(!matches.length){el.innerHTML=`<div style="text-align:center;color:var(--text2);padding:30px">Nessuna partita ancora!</div>`;return;}
   el.innerHTML=matches.map(m=>{
     const winner=m.goalA>m.goalB?m.teamA:m.goalA<m.goalB?m.teamB:null;
-    return `<div class="match-card">
-      <div class="match-meta"><span>📅 ${formatDate(m.date)}</span><span>${winner?'🏆 '+winner:'🤝 Pareggio'}</span></div>
-      <div class="match-score">
-        <div class="team-score">
-          <div class="team-name">${m.teamA}${winner===m.teamA?'<span class="winner-tag">WIN</span>':''}</div>
-          <div class="score-num" style="color:${winner===m.teamA?'var(--green)':'var(--text)'}">${m.goalA}</div>
+    return `<div class="match-card-ea">
+      <div class="match-header-ea"><span>📅 ${formatDate(m.date)}</span><span>${winner?'🏆 '+winner:'🤝 Pareggio'}</span></div>
+      <div class="match-body-ea">
+        <div class="match-score-ea">
+          <div class="team-ea">
+            <div class="team-name-ea">${m.teamA}${winner===m.teamA?'<span class="win-tag">WIN</span>':''}</div>
+            <div class="score-ea" style="color:${winner===m.teamA?'var(--lime)':'var(--white)'}">${m.goalA}</div>
+          </div>
+          <div class="score-vs">VS</div>
+          <div class="team-ea">
+            <div class="team-name-ea">${m.teamB}${winner===m.teamB?'<span class="win-tag">WIN</span>':''}</div>
+            <div class="score-ea" style="color:${winner===m.teamB?'var(--lime)':'var(--white)'}">${m.goalB}</div>
+          </div>
         </div>
-        <div class="score-sep">VS</div>
-        <div class="team-score">
-          <div class="team-name">${m.teamB}${winner===m.teamB?'<span class="winner-tag">WIN</span>':''}</div>
-          <div class="score-num" style="color:${winner===m.teamB?'var(--green)':'var(--text)'}">${m.goalB}</div>
-        </div>
+        ${m.scorers?`<div class="scorers-ea">⚽ <b>${m.scorers}</b></div>`:''}
+        <button class="match-delete-btn" onclick="deleteMatch('${m.id}')">🗑 Elimina partita</button>
       </div>
-      ${m.scorers?`<div class="match-scorers">⚽ <span>${m.scorers}</span></div>`:''}
-      <button class="match-delete-btn" onclick="deleteMatch('${m.id}')">🗑️ Elimina partita</button>
     </div>`;}).join('');
 }
 
@@ -1527,6 +1481,5 @@ async function init(){
 }
 init();
 </script>
-
-
-</body></html>
+</body>
+</html>
